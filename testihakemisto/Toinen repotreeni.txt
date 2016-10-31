@@ -1,0 +1,10 @@
+Toinen repotreeni
+
+Hankkiudu komentorivillä repositorion hakemistoosi (esim. OhHa). Anna komento mkdir testihakemisto luodaksesi uuden hakemiston.
+Lisää testihakemistoosi jokin tiedosto: etsi tietokoneeltasi luomasi hakemisto ja luo tai siirrä sinne vaikkapa tekstitiedosto.
+Lisää luomasi hakemisto versionhallinnoitavaksi antamalla komentoriville komento git add testihakemisto. Nyt versionhallinta seuraa hakemistotasi siinä mielessä, että se näkyy status-komennolla, ja sen voi siirtää paikalliseen versionhallintaan (commit). Huomaa, että typötyhjä hakemisto ei tule hallinnoitavaksi add-komennolla.
+Anna commit-komento (git commit -m “uusi testitiedosto ja -hakemisto lisatty”).
+Anna push-komento (git push). Tarkista Githubin nettisivulta, että uusi hakemistosi ja sen sisältämä tiedosto ilmestyvät repositorionäkymääsi.
+Huom: Jos haluat lisätä useita tiedostoja kerralla, se onnistuu komennolla git add .
+
+Nyt osaat lisätä Githubiin tiedostoja ja hakemistoita: add - commit - push! Tee samaan malliin harjoitustyöllesi dokumentaatiohakemisto ja sinne ensimmäisellä viikolla tarvittava dokumentointi.
