@@ -2,7 +2,7 @@ package blackjack.logic;
 
 /**
  *
- * @author jaria
+ * @author Jari Avikainen
  */
 public enum Suit {
     DIAMONDS, HEARTS, CLUBS, SPADES
