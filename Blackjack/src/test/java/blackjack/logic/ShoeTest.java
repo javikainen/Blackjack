@@ -26,7 +26,7 @@ public class ShoeTest {
     public void testShoeWith1DeckHas52Cards() {
         shoe = new Shoe(1);
         for (int i = 0; i < 52; i++) {
-            shoe.dealCard();
+            shoe.getCard();
         }
         assertFalse(shoe.hasCards());
     }
@@ -36,7 +36,7 @@ public class ShoeTest {
         shoe = new Shoe(1);
         Set<Card> cards = new HashSet<>();
         while (shoe.hasCards()) {
-            cards.add(shoe.dealCard());
+            cards.add(shoe.getCard());
         }
         assertEquals(52, cards.size());
     }
@@ -45,7 +45,7 @@ public class ShoeTest {
     public void testShoeWith2DecksHas104Cards() {
         shoe = new Shoe(2);
         for (int i = 0; i < 104; i++) {
-            shoe.dealCard();
+            shoe.getCard();
         }
         assertFalse(shoe.hasCards());
     }
@@ -55,7 +55,7 @@ public class ShoeTest {
         shoe = new Shoe(2);
         Set<Card> cards = new HashSet<>();
         while (shoe.hasCards()) {
-            cards.add(shoe.dealCard());
+            cards.add(shoe.getCard());
         }
         assertEquals(52, cards.size());
     }
