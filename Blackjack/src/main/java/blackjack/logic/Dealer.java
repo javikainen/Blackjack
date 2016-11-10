@@ -33,7 +33,7 @@ public class Dealer {
             this.hand.add(shoe.getCard());
         }
     }
-    
+
     public void resolveRound() {
         for (Player player : players) {
             resolveHand(player);
@@ -51,9 +51,9 @@ public class Dealer {
         }
         player.clearHand();
     }
-    
+
     public void play() {
-        while(true) {
+        while (true) {
             getBets();
             deal();
             resolveRound();
