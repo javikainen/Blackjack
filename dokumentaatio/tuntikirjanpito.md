@@ -6,4 +6,5 @@ Päivä | Tunnit | Kuvaus
 3.11.2016 | 2h | Koodausta
 4.11.2016 | 4h | Koodausta
 10.11.2016 | 2h | Koodausta ja testien säätö kuntoon
+10.11.2016 | 1h | Luokkakaavion piirtäminen sekä pit- ja checkstyle-raporttien lisäys dokumentaatioon
 ... | ... | ...
