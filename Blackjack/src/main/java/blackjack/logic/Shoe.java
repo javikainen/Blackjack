@@ -13,10 +13,13 @@ public class Shoe {
     private LinkedList<Card> contents;
     
     private final int decks;
+    
+    private int cardsLeft;
 
     public Shoe(int decks) {
         this.decks = decks;
         this.shuffle();
+        this.cardsLeft = decks * 52;
     }
     
     public void shuffle() {
@@ -35,7 +38,8 @@ public class Shoe {
         return !this.contents.isEmpty();
     }
     
-    public Card dealCard() {
+    public Card getCard() {
+        this.cardsLeft--;
         return this.contents.pop();
     }
     
