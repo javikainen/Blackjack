@@ -6,6 +6,10 @@ Toteutetaan Blackjack-peli graafisella käyttöliittymällä. Jakaja toimii tiet
 
 Peliin rakennetaan yksinkertainen graafinen käyttöliittymä, jossa pelikortit piirretään käyttäen valmiita Public Domain -lisenssin alla olevia pelikortteja (lähde: [opengameart.org][Pelikortit]). Pelinäkymän lisäksi käyttöliittymässä on toimintopainikkeet pelin aikana valittaville toiminnoille (aluksi panoksen valinta sekä Hit ja Stand, myöhemmin myös Split ja Double Down, mahdollisesti myös Insurance ja Surrender). Mahdollisuuksien mukaan peliin lisätään myös näppäimistöoikotiet yleisimmille toiminnoille.
 
+####Määrittelyvaiheen luokkakaavio
+
+![Määrittelyvaiheen luokkakaavio](/dokumentaatio/kuvat/M%C3%A4%C3%A4rittelyvaiheen%20luokkakaavio.PNG "Määrittelyvaiheen luokkakaavio")
+
 ####Pelin kulku
 
 Jokaisen kierroksen alussa kukin pelaaja valitsee panoksensa. Tämän jälkeen jakaja jakaa kaikille pelaajille sekä itselleen kaksi korttia kullekin. Pelaajien kortit ovat pöydällä kuvapuoli ylöspäin, jakajan korteista vain toinen on kuvapuoli ylöspäin. Tämän jälkeen kukin pelaaja vuorollaan voi ottaa yhden tai useamman lisäkortin pyrkimyksenään päästä mahdollisimman lähelle summaa 21 menemättä kuitenkaan yli. Jos pelaajan korttien arvo ylittää 21, pelaaja häviää panoksensa välittömästi. Korttien arvot ovat seuraavat:  
