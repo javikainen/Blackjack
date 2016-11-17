@@ -8,9 +8,14 @@ import java.util.ArrayList;
  */
 public class Hand {
     
-    private ArrayList<Card> contents = new ArrayList<>();
+    private final ArrayList<Card> contents;
     
-    private int[] cardValues = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10};
+    private final int[] cardValues;
+
+    public Hand() {
+        this.cardValues = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10};
+        this.contents = new ArrayList<>();
+    }
 
     public ArrayList<Card> getContents() {
         return contents;
