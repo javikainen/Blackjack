@@ -16,12 +16,6 @@ public class Dealer {
         return this.hand;
     }
 
-    public void getBets() {
-        for (Player player : players) {
-            player.setBet();
-        }
-    }
-
     public void deal() {
         for (int i = 0; i < 2; i++) {
             for (Player player : players) {
@@ -34,30 +28,22 @@ public class Dealer {
         }
     }
 
-    public void resolveRound() {
-        for (Player player : players) {
-            resolveHand(player);
-        }
-        this.hand = new Hand();
-    }
+//    public void resolveRound() {
+//        for (Player player : players) {
+//            resolveHand(player);
+//        }
+//        this.hand = new Hand();
+//    }
 
-    public void resolveHand(Player player) {
-        Choice playerChoice = player.getChoice();
-        boolean playerWin = true;
-        if (playerWin) {
-            player.addMoney(player.getCurrentBet());
-        } else {
-            player.clearBet();
-        }
-        player.clearHand();
-    }
-
-    public void play() {
-        while (true) {
-            getBets();
-            deal();
-            resolveRound();
-        }
-    }
+//    public void resolveHand(Player player) {
+//        Choice playerChoice = player.getChoice();
+//        boolean playerWin = true;
+//        if (playerWin) {
+//            player.addMoney(player.getCurrentBet());
+//        } else {
+//            player.clearBet();
+//        }
+//        player.clearHand();
+//    }
 
 }
