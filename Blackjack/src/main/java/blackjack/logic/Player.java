@@ -9,6 +9,8 @@ public class Player {
     private final String name;
 
     private int money;
+    
+    private boolean isAI;
 
     private int currentBet;
 
@@ -18,6 +20,7 @@ public class Player {
         this.name = name;
         this.money = money;
         this.currentBet = 0;
+        this.isAI = false;
     }
 
     public int getCurrentBet() {
@@ -30,6 +33,10 @@ public class Player {
 
     public String getName() {
         return name;
+    }
+    
+    public boolean isAI() {
+        return this.isAI;
     }
 
     public int getMoney() {
@@ -52,13 +59,13 @@ public class Player {
         this.hand.add(card);
     }
 
-    public void setBet() {
-        int newBet = 5; // Get input from player
+    public void setBet(int userBet) {
+        int newBet = userBet; // Get input from player
         this.money += currentBet - newBet;
         currentBet = newBet;
     }
 
-    public Choice getChoice() {
-        return Choice.STAND;
+    public void playHand() {
+        
     }
 }
