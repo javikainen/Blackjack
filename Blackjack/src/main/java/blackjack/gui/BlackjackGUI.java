@@ -1,20 +1,28 @@
 package blackjack.gui;
 
 import blackjack.logic.BlackjackLogic;
+import blackjack.logic.Player;
 
 /**
  *
  * @author Jari Avikainen
  */
-public class BlackjackUI extends javax.swing.JFrame {
+public class BlackjackGUI extends javax.swing.JFrame {
 
     /**
-     * Creates new form BlackjackUI
+     * Creates new form BlackjackGUI
      */
-    public BlackjackUI() {
+    private final BlackjackLogic gameLogic;
+
+    private int userBet;
+    private Status status;
+    private Player currentPlayer;
+
+    public BlackjackGUI() {
         initComponents();
-        BlackjackLogic gameLogic = new BlackjackLogic(this);
-        
+        this.gameLogic = new BlackjackLogic();
+        this.userBet = 0;
+        this.status = Status.BET;
     }
 
     /**
@@ -38,9 +46,9 @@ public class BlackjackUI extends javax.swing.JFrame {
         betAdd10Button = new javax.swing.JButton();
         hitButton = new javax.swing.JButton();
         standButton = new javax.swing.JButton();
+        dealButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1024, 768));
         setResizable(false);
 
         jPanel.setBackground(new java.awt.Color(20, 109, 48));
@@ -67,31 +75,74 @@ public class BlackjackUI extends javax.swing.JFrame {
         currentBetField.setText("0");
 
         zeroBetButton.setText("0");
+        zeroBetButton.setEnabled(false);
+        zeroBetButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                zeroBetButtonActionPerformed(evt);
+            }
+        });
 
         betAdd5Button.setText("5");
+        betAdd5Button.setEnabled(false);
+        betAdd5Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                betAdd5ButtonActionPerformed(evt);
+            }
+        });
 
         betAdd10Button.setText("10");
+        betAdd10Button.setEnabled(false);
+        betAdd10Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                betAdd10ButtonActionPerformed(evt);
+            }
+        });
 
         hitButton.setText("Hit");
+        hitButton.setEnabled(false);
+        hitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hitButtonActionPerformed(evt);
+            }
+        });
 
         standButton.setText("Stand");
+        standButton.setEnabled(false);
+
+        dealButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        dealButton.setText("Deal");
+        dealButton.setEnabled(false);
+        dealButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dealButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);
         jPanel.setLayout(jPanelLayout);
         jPanelLayout.setHorizontalGroup(
             jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(zeroBetButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(betLabel)
-                    .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(currentBetField)
-                        .addComponent(betAdd5Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(betAdd10Button)
-                .addGap(46, 46, 46)
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(betLabel)
+                            .addComponent(currentBetField, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(76, 76, 76))
+                    .addGroup(jPanelLayout.createSequentialGroup()
+                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelLayout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addComponent(zeroBetButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(betAdd5Button)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(betAdd10Button))
+                            .addGroup(jPanelLayout.createSequentialGroup()
+                                .addGap(59, 59, 59)
+                                .addComponent(dealButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)))
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(dealerHandLabel)
                     .addComponent(playerHandField, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
@@ -101,30 +152,38 @@ public class BlackjackUI extends javax.swing.JFrame {
                 .addComponent(hitButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(standButton)
-                .addContainerGap(405, Short.MAX_VALUE))
+                .addContainerGap(416, Short.MAX_VALUE))
         );
         jPanelLayout.setVerticalGroup(
             jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
-                .addContainerGap(312, Short.MAX_VALUE)
+                .addContainerGap(314, Short.MAX_VALUE)
                 .addComponent(dealerHandLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(dealerHandField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(206, 206, 206)
-                .addComponent(betLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(currentBetField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(playerHandLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(betAdd10Button)
-                    .addComponent(betAdd5Button)
-                    .addComponent(zeroBetButton)
-                    .addComponent(playerHandField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(hitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(standButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(68, 68, 68))
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelLayout.createSequentialGroup()
+                        .addGap(244, 244, 244)
+                        .addComponent(playerHandLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(playerHandField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(hitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(standButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(68, 68, 68))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(betLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(currentBetField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(16, 16, 16)
+                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(betAdd10Button)
+                            .addComponent(betAdd5Button)
+                            .addComponent(zeroBetButton))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dealButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(54, 54, 54))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -143,11 +202,40 @@ public class BlackjackUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void hitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hitButtonActionPerformed
+        currentPlayer.addCard(gameLogic.dealCard());
+        // Draw player cards
+        if (gameLogic.bust(currentPlayer)) {
+            this.status = Status.RESOLVE;
+        }
+    }//GEN-LAST:event_hitButtonActionPerformed
+
+    private void zeroBetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zeroBetButtonActionPerformed
+        this.userBet = 0;
+        this.currentBetField.setText(Integer.toString(this.userBet));
+    }//GEN-LAST:event_zeroBetButtonActionPerformed
+
+    private void betAdd5ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_betAdd5ButtonActionPerformed
+        this.userBet += 5;
+        this.currentBetField.setText(Integer.toString(this.userBet));
+    }//GEN-LAST:event_betAdd5ButtonActionPerformed
+
+    private void betAdd10ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_betAdd10ButtonActionPerformed
+        this.userBet += 10;
+        this.currentBetField.setText(Integer.toString(this.userBet));
+    }//GEN-LAST:event_betAdd10ButtonActionPerformed
+
+    private void dealButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dealButtonActionPerformed
+        gameLogic.setBets(this.userBet);
+        this.dealPhase();
+    }//GEN-LAST:event_dealButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton betAdd10Button;
     private javax.swing.JButton betAdd5Button;
     private javax.swing.JLabel betLabel;
     private javax.swing.JTextField currentBetField;
+    private javax.swing.JButton dealButton;
     private javax.swing.JTextField dealerHandField;
     private javax.swing.JLabel dealerHandLabel;
     private javax.swing.JButton hitButton;
@@ -158,8 +246,80 @@ public class BlackjackUI extends javax.swing.JFrame {
     private javax.swing.JButton zeroBetButton;
     // End of variables declaration//GEN-END:variables
 
-    public void update() {
-        
+    public void start() {
+        betPhase();
     }
 
+    private void setButtons() {
+        switch (this.status) {
+            case BET:
+                betAdd5Button.setEnabled(true);
+                betAdd10Button.setEnabled(true);
+                dealButton.setEnabled(true);
+                hitButton.setEnabled(false);
+                standButton.setEnabled(false);
+                zeroBetButton.setEnabled(true);
+                break;
+            case DEAL:
+                betAdd5Button.setEnabled(false);
+                betAdd10Button.setEnabled(false);
+                dealButton.setEnabled(false);
+                hitButton.setEnabled(false);
+                standButton.setEnabled(false);
+                zeroBetButton.setEnabled(false);
+                break;
+            case USER_PLAYING:
+                betAdd5Button.setEnabled(false);
+                betAdd10Button.setEnabled(false);
+                dealButton.setEnabled(false);
+                hitButton.setEnabled(true);
+                standButton.setEnabled(true);
+                zeroBetButton.setEnabled(false);
+                break;
+            case RESOLVE:
+                betAdd5Button.setEnabled(false);
+                betAdd10Button.setEnabled(false);
+                dealButton.setEnabled(false);
+                hitButton.setEnabled(false);
+                standButton.setEnabled(false);
+                zeroBetButton.setEnabled(false);
+        }
+    }
+
+    private void betPhase() {
+        this.status = Status.BET;
+        setButtons();
+    }
+
+    private void dealPhase() {
+        this.status = Status.DEAL;
+        setButtons();
+        gameLogic.deal();
+        // Display cards
+        this.resolvePhase();
+    }
+
+    private void resolvePhase() {
+        while (true) {
+            this.status = Status.RESOLVE;
+            currentPlayer = gameLogic.resolvePlayer();
+            if (currentPlayer == null) {
+                this.betPhase();
+                break;
+            } else if (currentPlayer.isAI()) {
+                currentPlayer.playHand();
+            } else {
+                userTurn();
+            }
+            // Display cards
+        }
+    }
+
+    private void userTurn() {
+        this.status = Status.USER_PLAYING;
+        setButtons();
+        while(this.status == Status.USER_PLAYING) {
+            // Wait for the user to finish
+        }
+    }
 }
