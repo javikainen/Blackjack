@@ -9,3 +9,7 @@ Projektin aiheena on toteuttaa javalla blackjack-peli graafisella käyttöliitty
 [Aiheen tarkempi kuvaus](dokumentaatio/aiheenKuvausJaRakenne.md)
 
 [Tuntikirjanpito](dokumentaatio/tuntikirjanpito.md)
+
+[PIT-raportti](https://htmlpreview.github.io/?https://github.com/javikainen/Blackjack/blob/master/dokumentaatio/pit-raportti/201611182157/index.html)
+
+[Checkstyle-raportti](https://htmlpreview.github.io/?https://github.com/javikainen/Blackjack/blob/master/dokumentaatio/checkstyle-raportti/checkstyle.html)
