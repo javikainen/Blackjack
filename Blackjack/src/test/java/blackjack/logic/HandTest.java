@@ -52,35 +52,50 @@ public class HandTest {
     }
 
     @Test
-    public void testGetValueWhenAceIs11() {
-        hand.add(new Card(Suit.CLUBS, 1));
-        hand.add(new Card(Suit.CLUBS, 7));
-        assertEquals(18, hand.getValue());
+    public void testGetValueSmallValueWithoutAce() {
+        hand.add(new Card(Suit.CLUBS, 2));
+        hand.add(new Card(Suit.CLUBS, 3));
+        hand.add(new Card(Suit.CLUBS, 6));
+        assertEquals(11, hand.getValue());
     }
 
     @Test
-    public void testGetValueWhenAceIs1() {
+    public void testGetValueSmallValueWithAce() {
         hand.add(new Card(Suit.CLUBS, 1));
+        hand.add(new Card(Suit.CLUBS, 3));
         hand.add(new Card(Suit.CLUBS, 7));
-        hand.add(new Card(Suit.CLUBS, 5));
-        assertEquals(13, hand.getValue());
+        assertEquals(21, hand.getValue());
     }
 
     @Test
-    public void testIsBlackJackWhenHandIsBlackjack() {
+    public void testGetValueLargeValueWithoutAce() {
+        hand.add(new Card(Suit.CLUBS, 2));
+        hand.add(new Card(Suit.CLUBS, 6));
+        hand.add(new Card(Suit.CLUBS, 4));
+        assertEquals(12, hand.getValue());
+    }
+    
+    @Test
+    public void testGetValueLargeValueWithAce() {
+        hand.add(new Card(Suit.CLUBS, 1));
+        hand.add(new Card(Suit.CLUBS, 7));
+        hand.add(new Card(Suit.CLUBS, 4));
+        assertEquals(12, hand.getValue());
+    }
+
+    @Test
+    public void testFalseNegativeBlackjack() {
         hand.add(new Card(Suit.CLUBS, 1));
         hand.add(new Card(Suit.DIAMONDS, 12));
         assertTrue(hand.isBlackJack());
     }
 
     @Test
-    public void testIsBlackJackWhenHandIsNotBlackjack() {
+    public void testFalsePositiveBlackjack() {
         hand.add(new Card(Suit.CLUBS, 1));
         hand.add(new Card(Suit.DIAMONDS, 5));
         hand.add(new Card(Suit.SPADES, 5));
-        if (hand.isBlackJack()) {
-            fail();
-        }
+        assertFalse(hand.isBlackJack());
         hand.add(new Card(Suit.HEARTS, 3));
         hand.add(new Card(Suit.SPADES, 7));
         assertFalse(hand.isBlackJack());
