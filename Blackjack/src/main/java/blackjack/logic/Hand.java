@@ -44,5 +44,9 @@ public class Hand {
     public boolean isBlackJack() {
         return (this.contents.size() == 2 && this.getValue() == 21);
     }
-
+    
+    public void clear() {
+        this.contents.clear();
+    }
+        
 }
