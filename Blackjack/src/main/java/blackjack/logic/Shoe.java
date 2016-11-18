@@ -14,12 +14,12 @@ public class Shoe {
     
     private final int decks;
     
-    private int cardsLeft;
+//    private int cardsLeft;
 
     public Shoe(int decks) {
         this.decks = decks;
         this.shuffle();
-        this.cardsLeft = decks * 52;
+//        this.cardsLeft = decks * 52;
     }
     
     public void shuffle() {
@@ -39,7 +39,11 @@ public class Shoe {
     }
     
     public Card getCard() {
-        this.cardsLeft--;
+//        this.cardsLeft--;
+        // If there are no cards left, fill the shoe again
+        if (!hasCards()) {
+            shuffle();
+        }
         return this.contents.pop();
     }
     
