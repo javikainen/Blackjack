@@ -8,19 +8,24 @@ import java.util.ArrayList;
  */
 public class BlackjackLogic {
 
-    ArrayList<Player> players;
-    Dealer dealer;
-    int nextPlayer;
-    Hand dealerHand;
-    Shoe shoe;
+    private ArrayList<Player> players;
+//    private Dealer dealer;
+    private int nextPlayer;
+    private Hand dealerHand;
+    private final Shoe shoe;
+    private int numberOfDecks = 1;
+    private int numAIPlayers = 0;
+    private int startingMoney = 1000;
 
     public BlackjackLogic() {
         players = new ArrayList<>();
-        players.add(new HumanPlayer("Player 1", 1000));
-    }
-
-    public Hand getDealerHand() {
-        return dealerHand;
+        players.add(new HumanPlayer("Human", startingMoney));
+        for (int i = 0; i < numAIPlayers; i++) {
+            players.add(new AIPlayer("AI " + (i + 1), startingMoney));
+        }
+        shoe = new Shoe(numberOfDecks);
+        dealerHand = new Hand();
+        nextPlayer = 0;
     }
 
     public Hand getPlayerHand(Player player) {
