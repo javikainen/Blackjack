@@ -16,7 +16,7 @@ public class BlackjackLogic {
 
     public BlackjackLogic() {
         players = new ArrayList<>();
-        players.add(new Player("Player 1", 1000));
+        players.add(new HumanPlayer("Player 1", 1000));
     }
 
     public Hand getDealerHand() {
@@ -64,7 +64,7 @@ public class BlackjackLogic {
         }
     }
     
-    public boolean bust(Player player) {
+    public boolean isBust(Player player) {
         return player.getHand().getValue() > 21;
     }
 }

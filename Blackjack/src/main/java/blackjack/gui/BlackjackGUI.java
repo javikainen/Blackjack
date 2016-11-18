@@ -3,6 +3,7 @@ package blackjack.gui;
 import blackjack.logic.BlackjackLogic;
 import blackjack.logic.Player;
 
+
 /**
  *
  * @author Jari Avikainen
@@ -205,7 +206,7 @@ public class BlackjackGUI extends javax.swing.JFrame {
     private void hitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hitButtonActionPerformed
         currentPlayer.addCard(gameLogic.dealCard());
         // Draw player cards
-        if (gameLogic.bust(currentPlayer)) {
+        if (gameLogic.isBust(currentPlayer)) {
             this.status = Status.RESOLVE;
         }
     }//GEN-LAST:event_hitButtonActionPerformed
