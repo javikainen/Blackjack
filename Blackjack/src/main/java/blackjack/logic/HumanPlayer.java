@@ -13,9 +13,11 @@ public class HumanPlayer extends Player {
 
     @Override
     public void setBet(int userBet) {
-        int newBet = userBet; // Use the bet chosen by the user
-        super.money += super.currentBet - newBet;
-        super.currentBet = newBet;
+        if (userBet > 0) {
+            int newBet = userBet; // Use the bet chosen by the user
+            super.money += super.currentBet - newBet;
+            super.currentBet = newBet;
+        }
     }
 
 }
