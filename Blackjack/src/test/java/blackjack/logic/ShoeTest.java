@@ -1,5 +1,6 @@
 package blackjack.logic;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import static org.junit.Assert.*;
@@ -61,34 +62,46 @@ public class ShoeTest {
     }
 
     @Test
-    public void testCardsInNewShoeAreNotInOrder() {
+    public void testCardsInNewOrRefilledShoeAreNotInOrder() {
         shoe = new Shoe(1);
-        
+
         boolean inOrder = true;
-        
-        for (Suit suit : Suit.values()) {
-            if (inOrder == false) {
-                break;
-            }
-            for (int i = 1; i < 14; i++) {
-                Card card = shoe.getCard();
-                if (card.getRank() != i || card.getSuit() != suit) {
-                    inOrder = false;
+
+        // First round tests for a new shoe, second round tests a refilled shoe.
+        for (int round = 0; round < 2; round++) {
+            for (Suit suit : Suit.values()) {
+                if (inOrder == false) {
                     break;
                 }
+                for (int i = 1; i < 14; i++) {
+                    Card card = shoe.getCard();
+                    if (card.getRank() != i || card.getSuit() != suit) {
+                        inOrder = false;
+                        break;
+                    }
+                }
+            }
+            assertEquals(false, inOrder);
+        }
+    }
+
+    @Test
+    public void testCardsHaveDifferentOrderForEveryFillingOfTheShoe() {
+        shoe = new Shoe(1);
+        ArrayList<Card> oldCards = new ArrayList<>();
+        while (shoe.hasCards()) {
+            oldCards.add(shoe.getCard());
+        }
+
+        boolean inOrder = true;
+
+        for (Card card : oldCards) {
+            if (shoe.getCard() != card) {
+                inOrder = false;
+                break;
             }
         }
         assertEquals(false, inOrder);
     }
 
-    @Test // This test will fail once every 52 test rounds!
-    public void testCardsAreShuffledAfterEmptyingTheShoe() {
-        shoe = new Shoe(1);
-        for (int i = 0; i < 52; i++) {
-            shoe.getCard();
-        }
-        Card card = shoe.getCard();
-        assertNotEquals(new Card(Suit.DIAMONDS, 1), card);
-    }
-    
 }
