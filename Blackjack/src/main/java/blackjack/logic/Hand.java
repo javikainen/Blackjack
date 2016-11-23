@@ -45,6 +45,10 @@ public class Hand {
         return (this.contents.size() == 2 && this.getValue() == 21);
     }
     
+    public boolean isBust() {
+        return (this.getValue() > 21);
+    }
+    
     public void clear() {
         this.contents.clear();
     }
