@@ -18,8 +18,8 @@ public class PlayerTest {
 
     @Before
     public void setUp() {
-        human = new HumanPlayer("Human", 1000);
-        AI = new AIPlayer("AI", 1000);
+        human = new HumanPlayer("Human", 1, 1000);
+        AI = new AIPlayer("AI", 2, 1000);
     }
 
     @Test

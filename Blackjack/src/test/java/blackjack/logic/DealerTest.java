@@ -21,7 +21,7 @@ public class DealerTest {
     @Before
     public void setUp() {
         players = new ArrayList<>();
-        players.add(new HumanPlayer("Human", 1000));
+        players.add(new HumanPlayer("Human", 1, 1000));
         dealer = new Dealer(players);
     }
     

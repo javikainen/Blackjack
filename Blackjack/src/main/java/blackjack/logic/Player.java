@@ -6,14 +6,16 @@ package blackjack.logic;
  */
 public abstract class Player {
 
+    final int id;
     final String name;
     int money;
     boolean isAI;
     int currentBet;
     Hand hand;
 
-    public Player(String name, int money) {
+    public Player(String name, int id, int money) {
         this.name = name;
+        this.id = id;
         this.money = money;
         this.currentBet = 0;
         this.hand = new Hand();
@@ -26,6 +28,10 @@ public abstract class Player {
     public String getName() {
         return this.name;
     }
+    
+    public int getID() {
+        return this.id;
+    }
 
     public int getMoney() {
         return this.money;
@@ -34,6 +40,12 @@ public abstract class Player {
     public void addMoney(int amount) {
         if (amount > 0) {
             this.money += amount;
+        }
+    }
+    
+    public void takeMoney(int amount) {
+        if (amount > 0) {
+            this.money -= amount;
         }
     }
 
