@@ -1,8 +1,10 @@
 package blackjack.gui;
 
 import blackjack.logic.BlackjackLogic;
+import blackjack.logic.Card;
+import blackjack.logic.Hand;
 import blackjack.logic.Player;
-
+import javax.swing.JTextField;
 
 /**
  *
@@ -16,14 +18,14 @@ public class BlackjackGUI extends javax.swing.JFrame {
     private final BlackjackLogic gameLogic;
 
     private int userBet;
-    private Status status;
+    private State state;
     private Player currentPlayer;
 
     public BlackjackGUI() {
         initComponents();
         this.gameLogic = new BlackjackLogic();
         this.userBet = 0;
-        this.status = Status.BET;
+        this.playerMoneyPane.setText(Integer.toString(gameLogic.getPlayers().get(0).getMoney()));
     }
 
     /**
@@ -38,8 +40,8 @@ public class BlackjackGUI extends javax.swing.JFrame {
         jPanel = new javax.swing.JPanel();
         dealerHandLabel = new javax.swing.JLabel();
         dealerHandField = new javax.swing.JTextField();
-        playerHandLabel = new javax.swing.JLabel();
-        playerHandField = new javax.swing.JTextField();
+        player1HandLabel = new javax.swing.JLabel();
+        player1HandField = new javax.swing.JTextField();
         betLabel = new javax.swing.JLabel();
         currentBetField = new javax.swing.JTextField();
         zeroBetButton = new javax.swing.JButton();
@@ -48,6 +50,12 @@ public class BlackjackGUI extends javax.swing.JFrame {
         hitButton = new javax.swing.JButton();
         standButton = new javax.swing.JButton();
         dealButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        playerMoneyPane = new javax.swing.JTextPane();
+        betLabel1 = new javax.swing.JLabel();
+        player1HandLabel1 = new javax.swing.JLabel();
+        playerHandValue = new javax.swing.JTextField();
+        dealerHandValue = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -61,13 +69,14 @@ public class BlackjackGUI extends javax.swing.JFrame {
         dealerHandField.setEditable(false);
         dealerHandField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        playerHandLabel.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
-        playerHandLabel.setText("Player Hand");
+        player1HandLabel.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        player1HandLabel.setText("Player Hand");
 
-        playerHandField.setEditable(false);
-        playerHandField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        player1HandField.setEditable(false);
+        player1HandField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         betLabel.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        betLabel.setLabelFor(currentBetField);
         betLabel.setText("Bet");
 
         currentBetField.setEditable(false);
@@ -109,6 +118,11 @@ public class BlackjackGUI extends javax.swing.JFrame {
 
         standButton.setText("Stand");
         standButton.setEnabled(false);
+        standButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                standButtonActionPerformed(evt);
+            }
+        });
 
         dealButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         dealButton.setText("Deal");
@@ -116,6 +130,34 @@ public class BlackjackGUI extends javax.swing.JFrame {
         dealButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dealButtonActionPerformed(evt);
+            }
+        });
+
+        jScrollPane1.setViewportView(playerMoneyPane);
+
+        betLabel1.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        betLabel1.setLabelFor(currentBetField);
+        betLabel1.setText("Player Money");
+
+        player1HandLabel1.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+
+        playerHandValue.setEditable(false);
+        playerHandValue.setBackground(new java.awt.Color(20, 109, 48));
+        playerHandValue.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        playerHandValue.setBorder(null);
+        playerHandValue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                playerHandValueActionPerformed(evt);
+            }
+        });
+
+        dealerHandValue.setEditable(false);
+        dealerHandValue.setBackground(new java.awt.Color(20, 109, 48));
+        dealerHandValue.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        dealerHandValue.setBorder(null);
+        dealerHandValue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dealerHandValueActionPerformed(evt);
             }
         });
 
@@ -134,46 +176,69 @@ public class BlackjackGUI extends javax.swing.JFrame {
                     .addGroup(jPanelLayout.createSequentialGroup()
                         .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelLayout.createSequentialGroup()
+                                .addGap(59, 59, 59)
+                                .addComponent(dealButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanelLayout.createSequentialGroup()
                                 .addGap(32, 32, 32)
                                 .addComponent(zeroBetButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(betAdd5Button)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(betAdd10Button))
-                            .addGroup(jPanelLayout.createSequentialGroup()
-                                .addGap(59, 59, 59)
-                                .addComponent(dealButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)))
+                                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanelLayout.createSequentialGroup()
+                                        .addComponent(betAdd5Button)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(betAdd10Button))
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)))
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(dealerHandLabel)
-                    .addComponent(playerHandField, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
-                    .addComponent(playerHandLabel)
+                    .addGroup(jPanelLayout.createSequentialGroup()
+                        .addComponent(player1HandLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(player1HandLabel1)
+                        .addGap(12, 12, 12)
+                        .addComponent(playerHandValue))
+                    .addGroup(jPanelLayout.createSequentialGroup()
+                        .addComponent(dealerHandLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(dealerHandValue))
+                    .addComponent(player1HandField, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
                     .addComponent(dealerHandField))
                 .addGap(59, 59, 59)
                 .addComponent(hitButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(standButton)
-                .addContainerGap(416, Short.MAX_VALUE))
+                .addContainerGap(385, Short.MAX_VALUE))
+            .addGroup(jPanelLayout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(betLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelLayout.setVerticalGroup(
             jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
-                .addContainerGap(314, Short.MAX_VALUE)
-                .addComponent(dealerHandLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(dealerHandField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanelLayout.createSequentialGroup()
+                .addContainerGap(311, Short.MAX_VALUE)
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
+                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(dealerHandLabel)
+                            .addComponent(dealerHandValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(dealerHandField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(244, 244, 244)
-                        .addComponent(playerHandLabel)
+                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(player1HandLabel)
+                            .addComponent(player1HandLabel1)
+                            .addComponent(playerHandValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(playerHandField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(player1HandField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(hitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(standButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(68, 68, 68))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
+                        .addComponent(betLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(59, 59, 59)
                         .addComponent(betLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(currentBetField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -205,9 +270,9 @@ public class BlackjackGUI extends javax.swing.JFrame {
 
     private void hitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hitButtonActionPerformed
         currentPlayer.addCard(gameLogic.dealCard());
-        // Draw player cards
-        if (gameLogic.isBust(currentPlayer)) {
-            this.status = Status.RESOLVE;
+        displayHand(getPlayArea(currentPlayer), currentPlayer.getHand());
+        if (currentPlayer.getHand().isBust()) {
+            newState(State.PLAY_HANDS);
         }
     }//GEN-LAST:event_hitButtonActionPerformed
 
@@ -228,31 +293,121 @@ public class BlackjackGUI extends javax.swing.JFrame {
 
     private void dealButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dealButtonActionPerformed
         gameLogic.setBets(this.userBet);
-        this.dealPhase();
+        this.playerMoneyPane.setText(Integer.toString(gameLogic.getPlayers().get(0).getMoney()));
+        newState(State.DEAL);
     }//GEN-LAST:event_dealButtonActionPerformed
+
+    private void standButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_standButtonActionPerformed
+        newState(State.PLAY_HANDS);
+    }//GEN-LAST:event_standButtonActionPerformed
+
+    private void playerHandValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playerHandValueActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_playerHandValueActionPerformed
+
+    private void dealerHandValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dealerHandValueActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dealerHandValueActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton betAdd10Button;
     private javax.swing.JButton betAdd5Button;
     private javax.swing.JLabel betLabel;
+    private javax.swing.JLabel betLabel1;
     private javax.swing.JTextField currentBetField;
     private javax.swing.JButton dealButton;
     private javax.swing.JTextField dealerHandField;
     private javax.swing.JLabel dealerHandLabel;
+    private javax.swing.JTextField dealerHandValue;
     private javax.swing.JButton hitButton;
     private javax.swing.JPanel jPanel;
-    private javax.swing.JTextField playerHandField;
-    private javax.swing.JLabel playerHandLabel;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField player1HandField;
+    private javax.swing.JLabel player1HandLabel;
+    private javax.swing.JLabel player1HandLabel1;
+    private javax.swing.JTextField playerHandValue;
+    private javax.swing.JTextPane playerMoneyPane;
     private javax.swing.JButton standButton;
     private javax.swing.JButton zeroBetButton;
     // End of variables declaration//GEN-END:variables
 
-    public void start() {
-        betPhase();
+    public void displayHand(JTextField area, Hand hand) {
+        StringBuilder handBuilder = new StringBuilder();
+        for (Card card : hand.getContents()) {
+            handBuilder.append(card.getSuit()).append(card.getRank()).append(", ");
+        }
+        handBuilder.delete(handBuilder.length() - 2, handBuilder.length());
+        if (area == dealerHandField && state == State.DEAL) {
+            handBuilder.replace(0, 3, "??"); // Hide the "hole card"
+        }
+        area.setText(handBuilder.toString());
+    }
+
+    private JTextField getPlayArea(Player player) {
+        switch (player.getID()) {
+            case 0:
+                return player1HandField;
+        }
+        return null;
+    }
+
+    public void newState(State state) {
+        this.state = state;
+        setButtons();
+        switch (this.state) {
+            case BET:
+                break;
+            case DEAL:
+                playerHandValue.setText("");
+                dealerHandValue.setText("");
+                gameLogic.deal();
+                for (Player player : gameLogic.getPlayers()) {
+                    displayHand(getPlayArea(player), player.getHand());
+                }
+                displayHand(dealerHandField, gameLogic.getDealerHand());
+                newState(State.PLAY_HANDS);
+                break;
+            case PLAY_HANDS:
+                playPhase();
+                break;
+            case USER_TURN:
+                break;
+            case DEALER_TURN:
+                gameLogic.playDealerHand();
+                displayHand(dealerHandField, gameLogic.getDealerHand());
+                newState(State.PAY);
+                break;
+            case PAY:
+                payPhase();
+        }
+    }
+
+    private void playPhase() {
+        while (true) {
+            currentPlayer = gameLogic.getNextPlayer();
+            if (currentPlayer == null) {
+                newState(State.DEALER_TURN);
+                break;
+            } else if (currentPlayer.isAI()) {
+                gameLogic.playAIHand(currentPlayer);
+            } else {
+                newState(State.USER_TURN);
+                break;
+            }
+            displayHand(getPlayArea(currentPlayer), currentPlayer.getHand());
+        }
+    }
+
+    private void payPhase() {
+        playerHandValue.setText(Integer.toString(gameLogic.getPlayers().get(0).getHand().getValue()));
+        dealerHandValue.setText(Integer.toString(gameLogic.getDealerHand().getValue()));
+        gameLogic.payWinnings();
+        playerMoneyPane.setText(Integer.toString(gameLogic.getPlayers().get(0).getMoney()));
+        newState(State.BET);
     }
 
     private void setButtons() {
-        switch (this.status) {
+        switch (this.state) {
             case BET:
                 betAdd5Button.setEnabled(true);
                 betAdd10Button.setEnabled(true);
@@ -261,15 +416,7 @@ public class BlackjackGUI extends javax.swing.JFrame {
                 standButton.setEnabled(false);
                 zeroBetButton.setEnabled(true);
                 break;
-            case DEAL:
-                betAdd5Button.setEnabled(false);
-                betAdd10Button.setEnabled(false);
-                dealButton.setEnabled(false);
-                hitButton.setEnabled(false);
-                standButton.setEnabled(false);
-                zeroBetButton.setEnabled(false);
-                break;
-            case USER_PLAYING:
+            case USER_TURN:
                 betAdd5Button.setEnabled(false);
                 betAdd10Button.setEnabled(false);
                 dealButton.setEnabled(false);
@@ -277,50 +424,17 @@ public class BlackjackGUI extends javax.swing.JFrame {
                 standButton.setEnabled(true);
                 zeroBetButton.setEnabled(false);
                 break;
-            case RESOLVE:
+            case DEAL:
+            case DEALER_TURN:
+            case PAY:
+            case PLAY_HANDS:
                 betAdd5Button.setEnabled(false);
                 betAdd10Button.setEnabled(false);
                 dealButton.setEnabled(false);
                 hitButton.setEnabled(false);
                 standButton.setEnabled(false);
                 zeroBetButton.setEnabled(false);
-        }
-    }
-
-    private void betPhase() {
-        this.status = Status.BET;
-        setButtons();
-    }
-
-    private void dealPhase() {
-        this.status = Status.DEAL;
-        setButtons();
-        gameLogic.deal();
-        // Display cards
-        this.resolvePhase();
-    }
-
-    private void resolvePhase() {
-        while (true) {
-            this.status = Status.RESOLVE;
-            currentPlayer = gameLogic.resolvePlayer();
-            if (currentPlayer == null) {
-                this.betPhase();
                 break;
-            } else if (currentPlayer.isAI()) {
-                currentPlayer.playHand();
-            } else {
-                userTurn();
-            }
-            // Display cards
-        }
-    }
-
-    private void userTurn() {
-        this.status = Status.USER_PLAYING;
-        setButtons();
-        while(this.status == Status.USER_PLAYING) {
-            // Wait for the user to finish
         }
     }
 }
