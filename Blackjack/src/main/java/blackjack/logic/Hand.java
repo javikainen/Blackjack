@@ -7,9 +7,9 @@ import java.util.ArrayList;
  * @author Jari Avikainen
  */
 public class Hand {
-    
+
     private final ArrayList<Card> contents;
-    
+
     private final int[] cardValues;
 
     public Hand() {
@@ -20,11 +20,11 @@ public class Hand {
     public ArrayList<Card> getContents() {
         return contents;
     }
-    
+
     public void add(Card card) {
         this.contents.add(card);
     }
-    
+
     public int getValue() {
         int value = 0;
         boolean containsAce = false;
@@ -44,13 +44,22 @@ public class Hand {
     public boolean isBlackJack() {
         return (this.contents.size() == 2 && this.getValue() == 21);
     }
-    
+
+    public boolean containsAce() {
+        for (Card card : contents) {
+            if (card.getRank() == 1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean isBust() {
         return (this.getValue() > 21);
     }
-    
+
     public void clear() {
         this.contents.clear();
     }
-        
+
 }
