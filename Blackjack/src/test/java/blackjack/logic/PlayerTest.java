@@ -55,6 +55,23 @@ public class PlayerTest {
     }
 
     @Test
+    public void testTakeMoney() {
+        human.takeMoney(1);
+        assertEquals(999, human.getMoney());
+    }
+
+    @Test
+    public void testTakeNegativeMoney() {
+        human.takeMoney(-1);
+        assertEquals(1000, human.getMoney());
+    }
+    
+    @Test
+    public void testGetID() {
+        assertEquals(1, human.getID());
+    }
+    
+    @Test
     public void testNewPlayerHasEmptyHand() {
         assertTrue(human.getHand().getContents().isEmpty());
     }
@@ -111,5 +128,6 @@ public class PlayerTest {
         AI.setBet(1);
         assertEquals(995, AI.getMoney());
     }
+    
 
 }
