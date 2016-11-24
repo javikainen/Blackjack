@@ -3,6 +3,9 @@ package blackjack.logic;
 import java.util.ArrayList;
 
 /**
+ * This class is the main game logic class. BlackjackLogic keeps track of all
+ * players, the shoe etc. and takes care of dealing cards, deciding the winners
+ * and so on.
  *
  * @author Jari Avikainen
  */
@@ -40,15 +43,23 @@ public class BlackjackLogic {
 
     public void setBets(int userBet) {
         for (Player player : players) {
-            player.setBet(userBet);
+            if (!player.isAI()) {
+                player.updateBet(userBet);
+            } else {
+                player.updateBet(chooseBet(player));
+            }
         }
+    }
+
+    public int chooseBet(Player player) {
+        return 10;
     }
 
     public void deal() {
         for (int i = 0; i < 2; i++) {
             for (Player player : players) {
                 if (!shoe.hasCards()) {
-                    shoe.shuffle();
+                    shoe.refill();
                 }
                 player.addCard(shoe.getCard());
             }
@@ -59,7 +70,7 @@ public class BlackjackLogic {
 
     public Card dealCard() {
         if (!shoe.hasCards()) {
-            shoe.shuffle();
+            shoe.refill();
         }
         return shoe.getCard();
     }
@@ -106,7 +117,7 @@ public class BlackjackLogic {
     public Hand getDealerHand() {
         return dealerHand;
     }
-    
+
     public void payWinnings() {
         for (Player player : players) {
             if (player.getHand().isBust()) {
