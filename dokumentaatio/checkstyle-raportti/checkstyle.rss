@@ -25,7 +25,7 @@ under the License.
     <language>en-us</language>
     <copyright>&#169;2016</copyright>
     <item>
-      <title>File: 14,
+      <title>File: 12,
              Errors: 0,
              Warnings: 0,
              Infos: 0
@@ -46,7 +46,7 @@ under the License.
           <tbody>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#blackjack.logic.Choice.java">blackjack/logic/Choice.java</a>
+                  <a href="${project.url}/checkstyle.html#blackjack.gui.Phase.java">blackjack/gui/Phase.java</a>
                 </td>
                 <td>
                   0
@@ -60,7 +60,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#blackjack.main.Testing.java">blackjack/main/Testing.java</a>
+                  <a href="${project.url}/checkstyle.html#blackjack.logic.Player.java">blackjack/logic/Player.java</a>
                 </td>
                 <td>
                   0
@@ -75,6 +75,20 @@ under the License.
                           <tr>
                 <td>
                   <a href="${project.url}/checkstyle.html#blackjack.logic.Dealer.java">blackjack/logic/Dealer.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#blackjack.main.Blackjack.java">blackjack/main/Blackjack.java</a>
                 </td>
                 <td>
                   0
@@ -145,48 +159,6 @@ under the License.
                           <tr>
                 <td>
                   <a href="${project.url}/checkstyle.html#blackjack.logic.Suit.java">blackjack/logic/Suit.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#blackjack.logic.Player.java">blackjack/logic/Player.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#blackjack.gui.Status.java">blackjack/gui/Status.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#blackjack.main.Blackjack.java">blackjack/main/Blackjack.java</a>
                 </td>
                 <td>
                   0
