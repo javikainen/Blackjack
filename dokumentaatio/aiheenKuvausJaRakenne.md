@@ -8,7 +8,7 @@ Peliin rakennetaan yksinkertainen graafinen käyttöliittymä, jossa pelikortit 
 
 ####Määrittelyvaiheen luokkakaavio
 
-![Määrittelyvaiheen luokkakaavio](/dokumentaatio/kuvat/Luokkakaavio.PNG "Määrittelyvaiheen luokkakaavio")
+![Määrittelyvaiheen luokkakaavio](/dokumentaatio/kuvat/Luokkakaavio.png "Määrittelyvaiheen luokkakaavio")
 
 ####Pelin kulku
 
