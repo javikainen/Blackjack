@@ -13,11 +13,17 @@ public class BlackjackLogic {
     private int nextPlayer;
     private Hand dealerHand;
     private final Shoe shoe;
-    private int numberOfDecks = 1;
-    private int numAIPlayers = 0;
-    private int startingMoney = 1000;
+    private int numberOfDecks;
+    private int numAIPlayers;
+    private int startingMoney;
 
-    public BlackjackLogic() {
+    public BlackjackLogic(int numAIs, int numDecks, int startingMoney) {
+        if (numAIs < 0 || numAIs > 2 || numDecks < 0 || startingMoney < 0) {
+            throw new IllegalArgumentException();
+        }
+        this.numAIPlayers = numAIs;
+        this.numberOfDecks = numDecks;
+        this.startingMoney = startingMoney;
         players = new ArrayList<>();
         players.add(new HumanPlayer("Human", 0, startingMoney));
         for (int i = 0; i < numAIPlayers; i++) {
@@ -72,8 +78,12 @@ public class BlackjackLogic {
 
     public void playAIHand(Player player) {
         if (player.isAI()) {
-            // do something
-            return;
+            while (player.getHand().getValue() < 17) {
+                player.getHand().add(shoe.getCard());
+            }
+            if (player.getHand().getValue() == 17 && player.getHand().containsAce()) {
+                player.getHand().add(shoe.getCard());
+            }
         } else {
             throw new IllegalArgumentException("playAIHand() argument is not an AI player!");
         }
@@ -100,15 +110,15 @@ public class BlackjackLogic {
     public void payWinnings() {
         for (Player player : players) {
             if (player.getHand().isBust()) {
-                player.takeMoney(player.currentBet);
+                player.takeMoney(player.getCurrentBet());
             } else if (player.getHand().isBlackJack() && !dealerHand.isBlackJack()) {
-                player.addMoney(player.currentBet * 3 / 2);
+                player.addMoney(player.getCurrentBet() * 3 / 2);
             } else if (dealerHand.isBust()) {
-                player.addMoney(player.currentBet);
+                player.addMoney(player.getCurrentBet());
             } else if (player.getHand().getValue() > dealerHand.getValue()) {
-                player.addMoney(player.currentBet);
+                player.addMoney(player.getCurrentBet());
             } else if (player.getHand().getValue() < dealerHand.getValue()) {
-                player.takeMoney(player.currentBet);
+                player.takeMoney(player.getCurrentBet());
             }
             player.clearHand();
         }
