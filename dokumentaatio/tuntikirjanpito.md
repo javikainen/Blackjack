@@ -11,4 +11,5 @@ Päivä | Tunnit | Kuvaus
 18.11.2016 | 1h | Koodausta
 18.11.2016 | 2h | Koodausta + luokkakaavion sekä pit- ja checkstyle-raporttien päivitys
 24.11.2016 | 3h | Koodausta (eka pelattava versio valmis)
+24.11.2016 | 1.5h | Koodausta
 ... | ... | ...
