@@ -10,10 +10,4 @@ public class AIPlayer extends Player {
         super(name, id, money);
         super.isAI = true;
     }
-    
-    @Override
-    public void playHand() {
-        // Reserved  for further extension
-    }
-
 }
