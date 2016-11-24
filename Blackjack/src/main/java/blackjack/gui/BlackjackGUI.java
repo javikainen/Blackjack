@@ -18,7 +18,7 @@ public class BlackjackGUI extends javax.swing.JFrame {
     private final BlackjackLogic gameLogic;
 
     private int userBet;
-    private State state;
+    private Phase state;
     private Player currentPlayer;
 
     public BlackjackGUI() {
@@ -272,7 +272,7 @@ public class BlackjackGUI extends javax.swing.JFrame {
         currentPlayer.addCard(gameLogic.dealCard());
         displayHand(getPlayArea(currentPlayer), currentPlayer.getHand());
         if (currentPlayer.getHand().isBust()) {
-            newState(State.PLAY_HANDS);
+            nextPhase(Phase.PLAY);
         }
     }//GEN-LAST:event_hitButtonActionPerformed
 
@@ -294,11 +294,11 @@ public class BlackjackGUI extends javax.swing.JFrame {
     private void dealButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dealButtonActionPerformed
         gameLogic.setBets(this.userBet);
         this.playerMoneyPane.setText(Integer.toString(gameLogic.getPlayers().get(0).getMoney()));
-        newState(State.DEAL);
+        nextPhase(Phase.DEAL);
     }//GEN-LAST:event_dealButtonActionPerformed
 
     private void standButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_standButtonActionPerformed
-        newState(State.PLAY_HANDS);
+        nextPhase(Phase.PLAY);
     }//GEN-LAST:event_standButtonActionPerformed
 
     private void playerHandValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playerHandValueActionPerformed
@@ -337,7 +337,7 @@ public class BlackjackGUI extends javax.swing.JFrame {
             handBuilder.append(card.getSuit()).append(card.getRank()).append(", ");
         }
         handBuilder.delete(handBuilder.length() - 2, handBuilder.length());
-        if (area == dealerHandField && state == State.DEAL) {
+        if (area == dealerHandField && state == Phase.DEAL) {
             handBuilder.replace(0, 3, "??"); // Hide the "hole card"
         }
         area.setText(handBuilder.toString());
@@ -351,23 +351,16 @@ public class BlackjackGUI extends javax.swing.JFrame {
         return null;
     }
 
-    public void newState(State state) {
-        this.state = state;
+    public void nextPhase(Phase phase) {
+        this.state = phase;
         setButtons();
         switch (this.state) {
             case BET:
                 break;
             case DEAL:
-                playerHandValue.setText("");
-                dealerHandValue.setText("");
-                gameLogic.deal();
-                for (Player player : gameLogic.getPlayers()) {
-                    displayHand(getPlayArea(player), player.getHand());
-                }
-                displayHand(dealerHandField, gameLogic.getDealerHand());
-                newState(State.PLAY_HANDS);
+                dealPhase();
                 break;
-            case PLAY_HANDS:
+            case PLAY:
                 playPhase();
                 break;
             case USER_TURN:
@@ -375,23 +368,34 @@ public class BlackjackGUI extends javax.swing.JFrame {
             case DEALER_TURN:
                 gameLogic.playDealerHand();
                 displayHand(dealerHandField, gameLogic.getDealerHand());
-                newState(State.PAY);
+                nextPhase(Phase.PAY);
                 break;
             case PAY:
                 payPhase();
         }
     }
 
+    private void dealPhase() {
+        playerHandValue.setText("");
+        dealerHandValue.setText("");
+        gameLogic.deal();
+        for (Player player : gameLogic.getPlayers()) {
+            displayHand(getPlayArea(player), player.getHand());
+        }
+        displayHand(dealerHandField, gameLogic.getDealerHand());
+        nextPhase(Phase.PLAY);
+    }
+
     private void playPhase() {
         while (true) {
             currentPlayer = gameLogic.getNextPlayer();
             if (currentPlayer == null) {
-                newState(State.DEALER_TURN);
+                nextPhase(Phase.DEALER_TURN);
                 break;
             } else if (currentPlayer.isAI()) {
                 gameLogic.playAIHand(currentPlayer);
             } else {
-                newState(State.USER_TURN);
+                nextPhase(Phase.USER_TURN);
                 break;
             }
             displayHand(getPlayArea(currentPlayer), currentPlayer.getHand());
@@ -403,7 +407,7 @@ public class BlackjackGUI extends javax.swing.JFrame {
         dealerHandValue.setText(Integer.toString(gameLogic.getDealerHand().getValue()));
         gameLogic.payWinnings();
         playerMoneyPane.setText(Integer.toString(gameLogic.getPlayers().get(0).getMoney()));
-        newState(State.BET);
+        nextPhase(Phase.BET);
     }
 
     private void setButtons() {
@@ -427,7 +431,7 @@ public class BlackjackGUI extends javax.swing.JFrame {
             case DEAL:
             case DEALER_TURN:
             case PAY:
-            case PLAY_HANDS:
+            case PLAY:
                 betAdd5Button.setEnabled(false);
                 betAdd10Button.setEnabled(false);
                 dealButton.setEnabled(false);
