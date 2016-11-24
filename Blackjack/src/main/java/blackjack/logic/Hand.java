@@ -3,6 +3,7 @@ package blackjack.logic;
 import java.util.ArrayList;
 
 /**
+ * Class Hand represents a single hand of cards.
  *
  * @author Jari Avikainen
  */

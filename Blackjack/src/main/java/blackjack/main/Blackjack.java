@@ -3,6 +3,7 @@ package blackjack.main;
 import blackjack.gui.*;
 
 /**
+ * The main class for the game. Creates the GUI and starts the game.
  *
  * @author Jari Avikainen
  */

@@ -7,6 +7,7 @@ import blackjack.logic.Player;
 import javax.swing.JTextField;
 
 /**
+ * This class creates the GUI and controls the flow of the program.
  *
  * @author Jari Avikainen
  */

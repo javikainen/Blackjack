@@ -3,11 +3,12 @@ package blackjack.logic;
 import java.util.Objects;
 
 /**
+ * This class is used for storing single playing cards.
  *
  * @author Jari Avikainen
  */
 public class Card {
-    
+
     private final Suit suit;
     private final int rank;
 
@@ -24,8 +25,6 @@ public class Card {
         return rank;
     }
 
-    
-    // Needed for some unit tests
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -51,5 +50,5 @@ public class Card {
         hash = 59 * hash + this.rank;
         return hash;
     }
-    
+
 }

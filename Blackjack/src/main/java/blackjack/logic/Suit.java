@@ -1,6 +1,7 @@
 package blackjack.logic;
 
 /**
+ * Enum Suit is used for representing the different suits of the playing cards.
  *
  * @author Jari Avikainen
  */

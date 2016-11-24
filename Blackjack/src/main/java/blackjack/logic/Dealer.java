@@ -3,6 +3,8 @@ package blackjack.logic;
 import java.util.ArrayList;
 
 /**
+ * This class represents the dealer. Dealer is currently not used, but it's
+ * functionality is contained in the BlackjackLogic class.
  *
  * @author Jari Avikainen
  */
@@ -17,7 +19,7 @@ public class Dealer {
         this.hand = new Hand();
         this.shoe = new Shoe(1);
     }
-    
+
     public Hand getHand() {
         return this.hand;
     }
@@ -25,31 +27,10 @@ public class Dealer {
     public void deal() {
         for (int i = 0; i < 2; i++) {
             for (Player player : players) {
-//                if (!shoe.hasCards()) {
-//                    shoe.shuffle();
-//                }
                 player.addCard(shoe.getCard());
             }
             this.hand.add(shoe.getCard());
         }
     }
-
-//    public void resolveRound() {
-//        for (Player player : players) {
-//            resolveHand(player);
-//        }
-//        this.hand = new Hand();
-//    }
-
-//    public void resolveHand(Player player) {
-//        Choice playerChoice = player.getChoice();
-//        boolean playerWin = true;
-//        if (playerWin) {
-//            player.addMoney(player.getCurrentBet());
-//        } else {
-//            player.clearBet();
-//        }
-//        player.clearHand();
-//    }
 
 }
