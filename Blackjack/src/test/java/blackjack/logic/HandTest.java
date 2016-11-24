@@ -116,5 +116,14 @@ public class HandTest {
         hand.add(new Card(Suit.CLUBS, 5));
         assertFalse(hand.isBust());
     }
+    
+    @Test
+    public void testContainsAce() {
+        hand.add(new Card(Suit.CLUBS, 5));
+        hand.add(new Card(Suit.CLUBS, 7));
+        assertFalse(hand.containsAce());
+        hand.add(new Card(Suit.DIAMONDS, 1));
+        assertTrue(hand.containsAce());
+    }
 
 }
