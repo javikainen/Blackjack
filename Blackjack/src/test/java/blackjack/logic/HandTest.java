@@ -100,5 +100,21 @@ public class HandTest {
         hand.add(new Card(Suit.SPADES, 7));
         assertFalse(hand.isBlackJack());
     }
+    
+    @Test
+    public void testBustHandIsBust() {
+        hand.add(new Card(Suit.CLUBS, 12));
+        hand.add(new Card(Suit.CLUBS, 6));
+        hand.add(new Card(Suit.CLUBS, 6));
+        assertTrue(hand.isBust());
+    }
+    
+    @Test
+    public void testNotBustHandIsNotBust() {
+        hand.add(new Card(Suit.CLUBS, 12));
+        hand.add(new Card(Suit.CLUBS, 6));
+        hand.add(new Card(Suit.CLUBS, 5));
+        assertFalse(hand.isBust());
+    }
 
 }
