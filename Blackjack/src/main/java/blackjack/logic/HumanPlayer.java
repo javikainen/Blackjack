@@ -1,6 +1,7 @@
 package blackjack.logic;
 
 /**
+ * This class is the player controlled by a human.
  *
  * @author Jari Avikainen
  */
@@ -10,19 +11,4 @@ public class HumanPlayer extends Player {
         super(name, id, money);
         isAI = false;
     }
-
-    @Override
-    public void setBet(int userBet) {
-        if (userBet > 0) {
-            int newBet = userBet; // Use the bet chosen by the user
-            int change = getCurrentBet() - newBet;
-            if (change >= 0) {
-                addMoney(change);
-            } else {
-                takeMoney(0 - change);
-            }
-            setCurrentBet(newBet);
-        }
-    }
-
 }

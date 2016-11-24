@@ -1,6 +1,7 @@
 package blackjack.logic;
 
 /**
+ * This class is the AI version of the Player.
  *
  * @author Jari Avikainen
  */
