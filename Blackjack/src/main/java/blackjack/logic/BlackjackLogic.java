@@ -73,6 +73,7 @@ public class BlackjackLogic {
     public void playAIHand(Player player) {
         if (player.isAI()) {
             // do something
+            return;
         } else {
             throw new IllegalArgumentException("playAIHand() argument is not an AI player!");
         }
@@ -100,9 +101,9 @@ public class BlackjackLogic {
         for (Player player : players) {
             if (player.getHand().isBust()) {
                 player.takeMoney(player.currentBet);
-            } else if (player.getHand().isBlackJack() && !dealerHand.isBlackJack()){
+            } else if (player.getHand().isBlackJack() && !dealerHand.isBlackJack()) {
                 player.addMoney(player.currentBet * 3 / 2);
-            } else if (dealerHand.isBust()){
+            } else if (dealerHand.isBust()) {
                 player.addMoney(player.currentBet);
             } else if (player.getHand().getValue() > dealerHand.getValue()) {
                 player.addMoney(player.currentBet);
