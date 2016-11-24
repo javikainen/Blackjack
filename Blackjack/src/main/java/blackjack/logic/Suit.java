@@ -19,7 +19,8 @@ public enum Suit {
                 return "C";
             case SPADES:
                 return "S";
+            default:
+                return "";
         }
-        return "?";
     }
 }
