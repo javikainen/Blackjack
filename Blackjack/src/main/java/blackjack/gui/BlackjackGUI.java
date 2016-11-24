@@ -23,7 +23,7 @@ public class BlackjackGUI extends javax.swing.JFrame {
 
     public BlackjackGUI() {
         initComponents();
-        this.gameLogic = new BlackjackLogic();
+        this.gameLogic = new BlackjackLogic(0, 1, 1000);
         this.userBet = 0;
         this.playerMoneyPane.setText(Integer.toString(gameLogic.getPlayers().get(0).getMoney()));
     }
