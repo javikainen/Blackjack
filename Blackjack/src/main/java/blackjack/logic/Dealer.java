@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class Dealer extends Player {
 
     public Dealer(String name, int id, int money) {
-        super("Dealer", 0, 0);
+        super(name, id, money);
     }
 
     @Override
