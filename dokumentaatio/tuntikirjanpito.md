@@ -13,4 +13,5 @@ Päivä | Tunnit | Kuvaus
 24.11.2016 | 3h | Koodausta (eka pelattava versio valmis)
 24.11.2016 | 1.5h | Koodausta
 24.11.2016 | 1h | Javadocien generointia ja koodin siivousta
+26.11.2016 | 3h | Koodausta
 ... | ... | ...
