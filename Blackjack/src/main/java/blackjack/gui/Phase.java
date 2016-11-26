@@ -8,5 +8,5 @@ package blackjack.gui;
  */
 public enum Phase {
 
-    BET, DEAL, USER_TURN, PLAY, DEALER_TURN, PAY
+    BET, DEAL, USER_TURN, PLAY, PAY
 }
