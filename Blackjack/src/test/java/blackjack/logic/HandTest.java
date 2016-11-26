@@ -105,7 +105,7 @@ public class HandTest {
     public void testBustHandIsBust() {
         hand.add(new Card(Suit.CLUBS, 12));
         hand.add(new Card(Suit.CLUBS, 6));
-        hand.add(new Card(Suit.CLUBS, 6));
+        hand.add(new Card(Suit.DIAMONDS, 6));
         assertTrue(hand.isBust());
     }
     
