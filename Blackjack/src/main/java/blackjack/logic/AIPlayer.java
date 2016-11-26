@@ -9,6 +9,21 @@ public class AIPlayer extends Player {
 
     public AIPlayer(String name, int id, int money) {
         super(name, id, money);
-        super.isAI = true;
+    }
+
+    @Override
+    public boolean isAI() {
+        return true;
+    }
+
+    @Override
+    public void playHand(Shoe shoe) {
+        while (getHand().getValue() < 17) {
+            getHand().add(shoe.getCard());
+        }
+        if (getHand().getValue() == 17 && getHand().containsAce()) {
+            getHand().add(shoe.getCard());
+        }
+
     }
 }

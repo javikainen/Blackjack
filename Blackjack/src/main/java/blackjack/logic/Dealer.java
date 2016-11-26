@@ -8,28 +8,30 @@ import java.util.ArrayList;
  *
  * @author Jari Avikainen
  */
-public class Dealer {
+public class Dealer extends Player {
 
-    Hand hand;
-    Shoe shoe;
-    ArrayList<Player> players;
-
-    public Dealer(ArrayList<Player> players) {
-        this.players = players;
-        this.hand = new Hand();
-        this.shoe = new Shoe(1);
+    public Dealer(String name, int id, int money) {
+        super("Dealer", 0, 0);
     }
 
-    public Hand getHand() {
-        return this.hand;
+    @Override
+    public void adjustBet(int newBet) {
     }
 
-    public void deal() {
-        for (int i = 0; i < 2; i++) {
-            for (Player player : players) {
-                player.addCard(shoe.getCard());
-            }
-            this.hand.add(shoe.getCard());
+    @Override
+    public boolean isAI() {
+        return true;
+    }
+
+    @Override
+    public boolean isDealer() {
+        return true;
+    }
+
+    @Override
+    public void playHand(Shoe shoe) {
+        while (getHand().getValue() < 17) {
+            getHand().add(shoe.getCard());
         }
     }
 

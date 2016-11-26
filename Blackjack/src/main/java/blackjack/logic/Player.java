@@ -11,7 +11,6 @@ public abstract class Player {
     private final int id;
     private final String name;
     private int money;
-    boolean isAI;
     private int currentBet;
     private Hand hand;
 
@@ -94,7 +93,7 @@ public abstract class Player {
      * @param newBet The amount chosen for the next bet. This has to be more
      * than zero.
      */
-    public void updateBet(int newBet) {
+    public void adjustBet(int newBet) {
         if (newBet > 0) {
             this.money += this.currentBet - newBet;
             this.currentBet = newBet;
@@ -105,7 +104,11 @@ public abstract class Player {
         this.currentBet = bet;
     }
 
-    public boolean isAI() {
-        return this.isAI;
+    public abstract boolean isAI();
+    
+    public boolean isDealer() {
+        return false;
     }
+    
+    public abstract void playHand(Shoe shoe);
 }

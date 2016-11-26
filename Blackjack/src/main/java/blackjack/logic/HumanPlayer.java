@@ -9,6 +9,14 @@ public class HumanPlayer extends Player {
 
     public HumanPlayer(String name, int id, int money) {
         super(name, id, money);
-        isAI = false;
+    }
+
+    @Override
+    public boolean isAI() {
+        return false;
+    }
+
+    @Override
+    public void playHand(Shoe shoe) {
     }
 }

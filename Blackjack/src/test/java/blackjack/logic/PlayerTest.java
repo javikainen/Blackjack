@@ -96,24 +96,24 @@ public class PlayerTest {
 
     @Test
     public void testSetBetChangesHumanCurrentBetProperly() {
-        human.updateBet(1);
+        human.adjustBet(1);
         assertEquals(1, human.getCurrentBet());
     }
 
     @Test
     public void testNegativeOrZeroBetIsIgnored() {
-        human.updateBet(10);
-        human.updateBet(0);
+        human.adjustBet(10);
+        human.adjustBet(0);
         assertEquals(10, human.getCurrentBet());
-        human.updateBet(-1);
+        human.adjustBet(-1);
         assertEquals(10, human.getCurrentBet());
     }
 
     @Test
     public void testRaisingAndLoweringBetAffectsPlayerMoneyProperly() {
-        human.updateBet(10);
+        human.adjustBet(10);
         assertEquals(990, human.getMoney());
-        human.updateBet(5);
+        human.adjustBet(5);
         assertEquals(995, human.getMoney());
     }
 
