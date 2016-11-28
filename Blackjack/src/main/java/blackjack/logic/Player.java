@@ -59,6 +59,10 @@ public abstract class Player {
     public void takeMoney(int amount) {
         if (amount > 0) {
             this.money -= amount;
+            if (this.money < 0) {
+                this.currentBet -= this.money;
+                this.money = 0;
+            }
         }
     }
 
@@ -94,9 +98,9 @@ public abstract class Player {
      * than zero.
      */
     public void adjustBet(int newBet) {
-        if (newBet > 0) {
-            this.money += this.currentBet - newBet;
-            this.currentBet = newBet;
+        if (newBet > 0 && newBet < currentBet + money) {
+            money += currentBet - newBet;
+            currentBet = newBet;
         }
     }
 
