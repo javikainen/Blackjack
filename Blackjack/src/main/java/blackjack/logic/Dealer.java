@@ -3,8 +3,8 @@ package blackjack.logic;
 import java.util.ArrayList;
 
 /**
- * This class represents the dealer. Dealer is currently not used, but it's
- * functionality is contained in the BlackjackLogic class.
+ * This class is used mainly for storing the dealer's hand and logic for drawing
+ * cards.
  *
  * @author Jari Avikainen
  */
@@ -14,6 +14,11 @@ public class Dealer extends Player {
         super(name, id, money);
     }
 
+    /**
+     * Ignores the parameter and does nothing.
+     *
+     * @param newBet 
+     */
     @Override
     public void adjustBet(int newBet) {
     }
