@@ -64,11 +64,11 @@ public class BlackjackLogic {
         nextPlayer = 0;
     }
 
-    public Card dealCard() {
+    public void dealCard(Player player) {
         if (!shoe.hasCards()) {
             shoe.refill();
         }
-        return shoe.getCard();
+        player.addCard(shoe.getCard());
     }
 
     public Player getNextPlayer() {
@@ -106,6 +106,8 @@ public class BlackjackLogic {
                 break;
             }
             if (player.getHand().isBust()) {
+                player.takeMoney(player.getCurrentBet());
+            } else if (dealer.getHand().isBlackJack() && !player.getHand().isBlackJack()) {
                 player.takeMoney(player.getCurrentBet());
             } else if (player.getHand().isBlackJack() && !dealer.getHand().isBlackJack()) {
                 player.addMoney(player.getCurrentBet() * 3 / 2);
