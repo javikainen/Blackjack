@@ -71,6 +71,13 @@ public class PlayerTest {
     }
 
     @Test
+    public void testTakeMoneyFromBetWhenPlayerOutOfMoney() {
+        human.setCurrentBet(50);
+        human.takeMoney(1025);
+        assertEquals(25, human.getCurrentBet());
+    }
+    
+    @Test
     public void testGetID() {
         assertEquals(1, human.getID());
     }
@@ -99,9 +106,21 @@ public class PlayerTest {
     }
 
     @Test
-    public void testSetBetChangesHumanCurrentBetProperly() {
+    public void testSetBetTo1ChangesCurrentBetProperly() {
         human.adjustBet(1);
         assertEquals(1, human.getCurrentBet());
+    }
+    
+    @Test
+    public void testBettingAllMoneyChangesCurrentBetProperly() {
+        human.adjustBet(1000);
+        assertEquals(1000, human.getCurrentBet());
+    }
+
+    @Test
+    public void testBettingMoreThanOwnedPrevented() {
+        human.adjustBet(1001);
+        assertEquals(0, human.getCurrentBet());
     }
 
     @Test
@@ -120,7 +139,7 @@ public class PlayerTest {
         human.adjustBet(5);
         assertEquals(995, human.getMoney());
     }
-
+    
     @Test
     public void testDealerPlayHand() {
         // Dealer takes cards until value is 17 or more.
