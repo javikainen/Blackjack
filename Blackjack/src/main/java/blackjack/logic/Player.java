@@ -60,7 +60,7 @@ public abstract class Player {
         if (amount > 0) {
             this.money -= amount;
             if (this.money < 0) {
-                this.currentBet -= this.money;
+                this.currentBet += this.money;
                 this.money = 0;
             }
         }
@@ -98,7 +98,7 @@ public abstract class Player {
      * than zero.
      */
     public void adjustBet(int newBet) {
-        if (newBet > 0 && newBet < currentBet + money) {
+        if (newBet > 0 && newBet <= currentBet + money) {
             money += currentBet - newBet;
             currentBet = newBet;
         }
