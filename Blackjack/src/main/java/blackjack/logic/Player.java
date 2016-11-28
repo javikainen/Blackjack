@@ -50,11 +50,11 @@ public abstract class Player {
     }
 
     /**
-     * Removes the given amount of money from the player
+     * Removes the given amount of money from the player. If the player runs out
+     * of money, take the rest from player's current bet.
      *
      * @param amount The amount of money to be removed. amount has to be
      * positive
-     *
      */
     public void takeMoney(int amount) {
         if (amount > 0) {
@@ -92,7 +92,9 @@ public abstract class Player {
     /**
      * Updates the player's bet to the chosen amount. This will increase or
      * decrease the amount of money the player has left by the difference
-     * between the previous bet and the chosen bet.
+     * between the previous bet and the chosen bet. Trying to increase the bet
+     * by more than the amount of money remaining does nothing. Classes
+     * extending Player may call this method using adjusted parameter.
      *
      * @param newBet The amount chosen for the next bet. This has to be more
      * than zero.
@@ -114,5 +116,11 @@ public abstract class Player {
         return false;
     }
 
+    /**
+     * Plays the current hand by taking more cards from the shoe until
+     * satisfied. The exact implementation depends on the type of player.
+     *
+     * @param shoe The shoe from which the new cards are taken.
+     */
     public abstract void playHand(Shoe shoe);
 }
