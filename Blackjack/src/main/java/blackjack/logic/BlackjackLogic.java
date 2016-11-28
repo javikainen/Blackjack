@@ -16,8 +16,19 @@ public class BlackjackLogic {
     private final Shoe shoe;
     private Dealer dealer;
 
+    /**
+     * Generate a new instance of BlackjackLogic using given parameters as the
+     * settings for the game. Players are generated and added to ArrayList<>
+     * Players according to the order in which they will play their hands.
+     *
+     * @param numAIs The amount of AI players participating in the game. Allowed
+     * values are 0, 1 and 2.
+     * @param numDecks Number of 52-card decks to be shuffled together into the
+     * shoe.
+     * @param startingMoney Amount of starting money given to the players.
+     */
     public BlackjackLogic(int numAIs, int numDecks, int startingMoney) {
-        if (numAIs < 0 || numAIs > 2 || numDecks < 0 || startingMoney < 0) {
+        if (numAIs < 0 || numAIs > 2 || numDecks < 1 || startingMoney <= 0) {
             throw new IllegalArgumentException();
         }
         players = new ArrayList<>();
@@ -38,12 +49,22 @@ public class BlackjackLogic {
         return player.getHand();
     }
 
+    /**
+     * Requests each of the players to set their bet for the next round. The bet
+     * chosen by the user is passed to the players as an argument.
+     *
+     * @param userBet The new bet chosen by the user.
+     */
     public void adjustBets(int userBet) {
         for (Player player : players) {
             player.adjustBet(userBet);
         }
     }
 
+    /**
+     * Deals two cards to each of the players and the dealer.
+     *
+     */
     public void deal() {
         for (int i = 0; i < 2; i++) {
             for (Player player : players) {
@@ -53,10 +74,21 @@ public class BlackjackLogic {
         nextPlayer = 0;
     }
 
+    /**
+     * Deals one card to the player given as a parameter.
+     *
+     * @param player The Player to which the new card is dealt.
+     */
     public void dealCard(Player player) {
         player.addCard(shoe.getCard());
     }
 
+    /**
+     * Returns the Player whose turn it is to play.
+     *
+     * @return Player whose turn it is at the moment or null, if all the players
+     * (including the dealer) have played their turn.
+     */
     public Player getNextPlayer() {
         Player player;
         if (nextPlayer >= players.size()) {
@@ -69,6 +101,12 @@ public class BlackjackLogic {
         return player;
     }
 
+    /**
+     * Instructs the AI player given as a parameter to play its turn. Throws an
+     * IllegalArgumentException if The Player given is not an AI.
+     *
+     * @param player The Player that should play its turn.
+     */
     public void playAIHand(Player player) {
         if (player.isAI()) {
             player.playHand(shoe);
@@ -81,10 +119,22 @@ public class BlackjackLogic {
         return players;
     }
 
+    /**
+     * Returns the dealer's hand.
+     *
+     * @return The dealer's hand.
+     */
     public Hand getDealerHand() {
         return dealer.getHand();
     }
 
+    /**
+     * Goes through all of the players, evaluates their hands compared to the
+     * dealer, and adjusts the player's money according to the results.
+     *
+     * Hands are cleared after resolving them.
+     *
+     */
     public void payWinnings() {
         for (Player player : players) {
             if (player.isDealer()) {
