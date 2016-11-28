@@ -412,7 +412,7 @@ public class BlackjackGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void hitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hitButtonActionPerformed
-        player.addCard(gameLogic.dealCard());
+        gameLogic.dealCard(player);
         displayHand(getPlayArea(player), player.getHand());
         if (player.getHand().isBust()) {
             nextPhase(Phase.PLAY);
@@ -498,7 +498,7 @@ public class BlackjackGUI extends javax.swing.JFrame {
         }
         return null;
     }
-    
+
     private JLabel handValueLabel(Player player) {
         switch (player.getID()) {
             case 0:
