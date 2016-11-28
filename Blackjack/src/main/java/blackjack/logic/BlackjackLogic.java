@@ -55,9 +55,6 @@ public class BlackjackLogic {
     public void deal() {
         for (int i = 0; i < 2; i++) {
             for (Player player : players) {
-                if (!shoe.hasCards()) {
-                    shoe.refill();
-                }
                 player.addCard(shoe.getCard());
             }
         }
@@ -65,9 +62,6 @@ public class BlackjackLogic {
     }
 
     public void dealCard(Player player) {
-        if (!shoe.hasCards()) {
-            shoe.refill();
-        }
         player.addCard(shoe.getCard());
     }
 
