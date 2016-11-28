@@ -27,7 +27,6 @@ public class BlackjackLogicTest {
         gameLogic = new BlackjackLogic(3, 1, 1000);
         gameLogic = new BlackjackLogic(2, 0, 1000);
         gameLogic = new BlackjackLogic(2, 1, 0);
-//        assertTrue(true);
     }
 
     @Test
@@ -45,7 +44,7 @@ public class BlackjackLogicTest {
     @Test
     public void testNewBlackJackLogicHasCorrentNumberOfAIPlayers() {
         for (int i = 0; i < 3; i++) {
-            gameLogic = new BlackjackLogic(i, 0, 1000);
+            gameLogic = new BlackjackLogic(i, 1, 1000);
             List<Player> players = gameLogic.getPlayers();
             int numAIs = 0;
             for (Player player : players) {
