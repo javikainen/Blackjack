@@ -20,9 +20,4 @@ public class HumanPlayer extends Player {
     public void playHand(Shoe shoe) {
     }
 
-    @Override
-    public void adjustBet(int newBet) {
-        super.adjustBet(newBet);
-    }
-
 }
