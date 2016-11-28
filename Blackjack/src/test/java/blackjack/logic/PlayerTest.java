@@ -15,11 +15,15 @@ public class PlayerTest {
 
     Player human;
     Player AI;
+    Player dealer;
+    Shoe shoe;
 
     @Before
     public void setUp() {
         human = new HumanPlayer("Human", 1, 1000);
         AI = new AIPlayer("AI", 2, 1000);
+        dealer = new Dealer("Dealer", 3, 0);
+        shoe = new Shoe(1);
     }
 
     @Test
@@ -115,6 +119,58 @@ public class PlayerTest {
         assertEquals(990, human.getMoney());
         human.adjustBet(5);
         assertEquals(995, human.getMoney());
+    }
+
+    @Test
+    public void testDealerPlayHand() {
+        // Dealer takes cards until value is 17 or more.
+        dealer.playHand(shoe);
+        assertTrue(dealer.getHand().getValue() >= 17);
+
+        dealer.getHand().clear();
+
+        // Dealer stands on hard 17
+        dealer.addCard(new Card(Suit.CLUBS, 7));
+        dealer.addCard(new Card(Suit.CLUBS, 11));
+        dealer.playHand(shoe);
+        assertEquals(2, dealer.getHand().getContents().size());
+
+        dealer.getHand().clear();
+
+        // Dealer stands on soft 17
+        dealer.addCard(new Card(Suit.CLUBS, 6));
+        dealer.addCard(new Card(Suit.CLUBS, 1));
+        dealer.playHand(shoe);
+        assertEquals(2, dealer.getHand().getContents().size());
+    }
+
+    @Test
+    public void testAIPlayHand() {
+        // AI takes cards until value is 17 or more.
+        AI.playHand(shoe);
+        assertTrue(AI.getHand().getValue() >= 17);
+
+        AI.getHand().clear();
+
+        // AI stands on hard 17
+        AI.addCard(new Card(Suit.CLUBS, 7));
+        AI.addCard(new Card(Suit.CLUBS, 11));
+        AI.playHand(shoe);
+        assertEquals(2, AI.getHand().getContents().size());
+
+        AI.getHand().clear();
+
+        // AI hits on soft 17
+        AI.addCard(new Card(Suit.CLUBS, 6));
+        AI.addCard(new Card(Suit.CLUBS, 1));
+        AI.playHand(shoe);
+        assertTrue(AI.getHand().getContents().size() > 2);
+    }
+
+    @Test
+    public void testHumanPlayHandDoesNothing() {
+        human.playHand(shoe);
+        assertTrue(human.getHand().getContents().isEmpty());
     }
 
 }

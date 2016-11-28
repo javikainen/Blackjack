@@ -105,10 +105,10 @@ public abstract class Player {
     }
 
     public abstract boolean isAI();
-    
+
     public boolean isDealer() {
         return false;
     }
-    
+
     public abstract void playHand(Shoe shoe);
 }
