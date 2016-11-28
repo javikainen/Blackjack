@@ -18,8 +18,9 @@ public class BlackjackLogic {
 
     /**
      * Generate a new instance of BlackjackLogic using given parameters as the
-     * settings for the game. Players are generated and added to ArrayList<>
-     * Players according to the order in which they will play their hands.
+     * settings for the game. Players are generated and added to ArrayList
+     * players Players according to the order in which they will play their
+     * hands.
      *
      * @param numAIs The amount of AI players participating in the game. Allowed
      * values are 0, 1 and 2.

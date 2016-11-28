@@ -17,7 +17,7 @@ public class Dealer extends Player {
     /**
      * Ignores the parameter and does nothing.
      *
-     * @param newBet 
+     * @param newBet Parameter is ignored.
      */
     @Override
     public void adjustBet(int newBet) {
