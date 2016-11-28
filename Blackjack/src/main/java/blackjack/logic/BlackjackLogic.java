@@ -40,16 +40,8 @@ public class BlackjackLogic {
 
     public void adjustBets(int userBet) {
         for (Player player : players) {
-            if (!player.isAI()) {
-                player.adjustBet(userBet);
-            } else {
-                player.adjustBet(chooseBet(player));
-            }
+            player.adjustBet(userBet);
         }
-    }
-
-    public int chooseBet(Player player) {
-        return 10;
     }
 
     public void deal() {

@@ -24,6 +24,11 @@ public class AIPlayer extends Player {
         if (getHand().getValue() == 17 && getHand().containsAce()) {
             getHand().add(shoe.getCard());
         }
-
     }
+
+    @Override
+    public void adjustBet(int newBet) {
+        super.adjustBet(10);
+    }
+
 }
