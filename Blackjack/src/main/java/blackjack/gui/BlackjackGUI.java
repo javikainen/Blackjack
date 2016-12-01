@@ -19,17 +19,18 @@ public class BlackjackGUI extends javax.swing.JFrame {
     private int userBet;
     private Phase phase;
     private Player player;
+    private Player humanPlayer;
+    private CardMap cardImages;
+
+    // Settings for the game
     private int numberOfAIPlayers = 2;
     private int startingMoney = 1000;
     private int numberOfDecks = 2;
-    private Player humanPlayer;
-    private CardMap cardImages;
     private String cardColor = "red";
 
     /**
      * Creates the GUI and creates and initialises new BlackjackLogic using
      * current settings.
-     *
      */
     public BlackjackGUI() {
         initComponents();
