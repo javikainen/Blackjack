@@ -6,6 +6,7 @@ import blackjack.logic.Hand;
 import blackjack.logic.Player;
 import java.util.List;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  * This class creates the GUI and controls the flow of the program.
@@ -26,9 +27,11 @@ public class BlackjackGUI extends javax.swing.JFrame {
     private int startingMoney = 1000;
     private int numberOfDecks = 2;
     private Player humanPlayer;
+    private CardMap cardImages;
 
     public BlackjackGUI() {
         initComponents();
+        cardImages = new CardMap();
         this.gameLogic = new BlackjackLogic(numberOfAIPlayers, numberOfDecks, startingMoney);
         this.userBet = 0;
 
@@ -61,12 +64,20 @@ public class BlackjackGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel = new javax.swing.JPanel();
+        AIHandPanel1 = new javax.swing.JPanel();
+        AIHandLabel1 = new javax.swing.JLabel();
+        AIHandValue1 = new javax.swing.JLabel();
+        AICardPanel1 = new javax.swing.JPanel();
         hitButton = new javax.swing.JButton();
         standButton = new javax.swing.JButton();
+        AIHandPanel2 = new javax.swing.JPanel();
+        AIHandLabel2 = new javax.swing.JLabel();
+        AIHandValue2 = new javax.swing.JLabel();
+        AICardPanel2 = new javax.swing.JPanel();
         playerHandPanel = new javax.swing.JPanel();
         playerHandLabel = new javax.swing.JLabel();
         playerHandValue = new javax.swing.JLabel();
-        playerHandContents = new javax.swing.JLabel();
+        playerCardPanel = new javax.swing.JPanel();
         playerMoneylabel = new javax.swing.JLabel();
         betPanel = new javax.swing.JPanel();
         betLabel = new javax.swing.JLabel();
@@ -74,18 +85,10 @@ public class BlackjackGUI extends javax.swing.JFrame {
         zeroBetButton = new javax.swing.JButton();
         betAdd5Button = new javax.swing.JButton();
         dealButton = new javax.swing.JButton();
-        AIHandPanel1 = new javax.swing.JPanel();
-        AIHandLabel1 = new javax.swing.JLabel();
-        AIHandValue1 = new javax.swing.JLabel();
-        AIHandContents1 = new javax.swing.JLabel();
-        AIHandPanel2 = new javax.swing.JPanel();
-        AIHandLabel2 = new javax.swing.JLabel();
-        AIHandValue2 = new javax.swing.JLabel();
-        AIHandContents2 = new javax.swing.JLabel();
         dealerHandPanel = new javax.swing.JPanel();
         dealerHandLabel = new javax.swing.JLabel();
         dealerHandValue = new javax.swing.JLabel();
-        dealerHandContents = new javax.swing.JLabel();
+        dealerCardPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -95,6 +98,28 @@ public class BlackjackGUI extends javax.swing.JFrame {
         jPanel.setPreferredSize(new java.awt.Dimension(1024, 768));
         jPanel.setRequestFocusEnabled(false);
         jPanel.setVerifyInputWhenFocusTarget(false);
+
+        AIHandPanel1.setFocusable(false);
+        AIHandPanel1.setOpaque(false);
+        AIHandPanel1.setLayout(new java.awt.BorderLayout(10, 5));
+
+        AIHandLabel1.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        AIHandLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AIHandLabel1.setText("AI 2");
+        AIHandLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        AIHandPanel1.add(AIHandLabel1, java.awt.BorderLayout.CENTER);
+
+        AIHandValue1.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        AIHandValue1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AIHandValue1.setMinimumSize(new java.awt.Dimension(38, 30));
+        AIHandValue1.setPreferredSize(new java.awt.Dimension(38, 30));
+        AIHandPanel1.add(AIHandValue1, java.awt.BorderLayout.SOUTH);
+
+        AICardPanel1.setBackground(new java.awt.Color(20, 109, 48));
+        AICardPanel1.setMinimumSize(new java.awt.Dimension(91, 126));
+        AICardPanel1.setPreferredSize(new java.awt.Dimension(369, 126));
+        AICardPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, -50, 0));
+        AIHandPanel1.add(AICardPanel1, java.awt.BorderLayout.NORTH);
 
         hitButton.setText("Hit");
         hitButton.setEnabled(false);
@@ -112,43 +137,47 @@ public class BlackjackGUI extends javax.swing.JFrame {
             }
         });
 
+        AIHandPanel2.setFocusable(false);
+        AIHandPanel2.setOpaque(false);
+        AIHandPanel2.setLayout(new java.awt.BorderLayout(10, 5));
+
+        AIHandLabel2.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        AIHandLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AIHandLabel2.setText("AI 1");
+        AIHandLabel2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        AIHandPanel2.add(AIHandLabel2, java.awt.BorderLayout.CENTER);
+
+        AIHandValue2.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        AIHandValue2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AIHandValue2.setPreferredSize(new java.awt.Dimension(38, 30));
+        AIHandPanel2.add(AIHandValue2, java.awt.BorderLayout.SOUTH);
+
+        AICardPanel2.setBackground(new java.awt.Color(20, 109, 48));
+        AICardPanel2.setMinimumSize(new java.awt.Dimension(91, 126));
+        AICardPanel2.setPreferredSize(new java.awt.Dimension(369, 126));
+        AICardPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, -50, 0));
+        AIHandPanel2.add(AICardPanel2, java.awt.BorderLayout.NORTH);
+
         playerHandPanel.setFocusable(false);
         playerHandPanel.setOpaque(false);
+        playerHandPanel.setLayout(new java.awt.BorderLayout(10, 5));
 
         playerHandLabel.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        playerHandLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         playerHandLabel.setText("Player");
+        playerHandLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        playerHandPanel.add(playerHandLabel, java.awt.BorderLayout.CENTER);
 
         playerHandValue.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        playerHandValue.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        playerHandValue.setPreferredSize(new java.awt.Dimension(38, 30));
+        playerHandPanel.add(playerHandValue, java.awt.BorderLayout.SOUTH);
 
-        playerHandContents.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
-        playerHandContents.setFocusable(false);
-
-        javax.swing.GroupLayout playerHandPanelLayout = new javax.swing.GroupLayout(playerHandPanel);
-        playerHandPanel.setLayout(playerHandPanelLayout);
-        playerHandPanelLayout.setHorizontalGroup(
-            playerHandPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(playerHandPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(playerHandPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(playerHandContents, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(playerHandPanelLayout.createSequentialGroup()
-                        .addComponent(playerHandLabel)
-                        .addGap(18, 18, 18)
-                        .addComponent(playerHandValue, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 40, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        playerHandPanelLayout.setVerticalGroup(
-            playerHandPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(playerHandPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(playerHandPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(playerHandLabel)
-                    .addComponent(playerHandValue, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(playerHandContents, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        playerCardPanel.setBackground(new java.awt.Color(20, 109, 48));
+        playerCardPanel.setMinimumSize(new java.awt.Dimension(91, 126));
+        playerCardPanel.setPreferredSize(new java.awt.Dimension(369, 126));
+        playerCardPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, -50, 0));
+        playerHandPanel.add(playerCardPanel, java.awt.BorderLayout.NORTH);
 
         playerMoneylabel.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         playerMoneylabel.setText("Player Money: 0");
@@ -223,178 +252,87 @@ public class BlackjackGUI extends javax.swing.JFrame {
                     .addComponent(zeroBetButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(dealButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        AIHandPanel1.setFocusable(false);
-        AIHandPanel1.setOpaque(false);
-        AIHandPanel1.setVisible(false);
-
-        AIHandLabel1.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
-        AIHandLabel1.setText("AI 2");
-
-        AIHandValue1.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
-
-        AIHandContents1.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
-        AIHandContents1.setFocusable(false);
-
-        javax.swing.GroupLayout AIHandPanel1Layout = new javax.swing.GroupLayout(AIHandPanel1);
-        AIHandPanel1.setLayout(AIHandPanel1Layout);
-        AIHandPanel1Layout.setHorizontalGroup(
-            AIHandPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AIHandPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(AIHandPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(AIHandContents1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(AIHandPanel1Layout.createSequentialGroup()
-                        .addComponent(AIHandLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(AIHandValue1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        AIHandPanel1Layout.setVerticalGroup(
-            AIHandPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AIHandPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(AIHandPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AIHandLabel1)
-                    .addComponent(AIHandValue1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(AIHandContents1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        AIHandPanel2.setFocusable(false);
-        AIHandPanel2.setOpaque(false);
-        AIHandPanel2.setVisible(false);
-
-        AIHandLabel2.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
-        AIHandLabel2.setText("AI 1");
-
-        AIHandValue2.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
-
-        AIHandContents2.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
-        AIHandContents2.setFocusable(false);
-
-        javax.swing.GroupLayout AIHandPanel2Layout = new javax.swing.GroupLayout(AIHandPanel2);
-        AIHandPanel2.setLayout(AIHandPanel2Layout);
-        AIHandPanel2Layout.setHorizontalGroup(
-            AIHandPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AIHandPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(AIHandPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(AIHandContents2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(AIHandPanel2Layout.createSequentialGroup()
-                        .addComponent(AIHandLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(AIHandValue2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 20, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        AIHandPanel2Layout.setVerticalGroup(
-            AIHandPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AIHandPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(AIHandPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AIHandLabel2)
-                    .addComponent(AIHandValue2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(AIHandContents2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(37, 37, 37))
         );
 
         dealerHandPanel.setFocusable(false);
         dealerHandPanel.setOpaque(false);
+        dealerHandPanel.setLayout(new java.awt.BorderLayout(10, 5));
 
         dealerHandLabel.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        dealerHandLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         dealerHandLabel.setText("Dealer");
+        dealerHandLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        dealerHandPanel.add(dealerHandLabel, java.awt.BorderLayout.CENTER);
 
         dealerHandValue.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        dealerHandValue.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        dealerHandValue.setPreferredSize(new java.awt.Dimension(38, 30));
+        dealerHandPanel.add(dealerHandValue, java.awt.BorderLayout.SOUTH);
 
-        dealerHandContents.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
-        dealerHandContents.setFocusable(false);
-
-        javax.swing.GroupLayout dealerHandPanelLayout = new javax.swing.GroupLayout(dealerHandPanel);
-        dealerHandPanel.setLayout(dealerHandPanelLayout);
-        dealerHandPanelLayout.setHorizontalGroup(
-            dealerHandPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dealerHandPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(dealerHandPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(dealerHandContents, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(dealerHandPanelLayout.createSequentialGroup()
-                        .addComponent(dealerHandLabel)
-                        .addGap(18, 18, 18)
-                        .addComponent(dealerHandValue, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 20, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        dealerHandPanelLayout.setVerticalGroup(
-            dealerHandPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dealerHandPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(dealerHandPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(dealerHandLabel)
-                    .addComponent(dealerHandValue, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(dealerHandContents, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        dealerCardPanel.setBackground(new java.awt.Color(20, 109, 48));
+        dealerCardPanel.setMinimumSize(new java.awt.Dimension(91, 126));
+        dealerCardPanel.setPreferredSize(new java.awt.Dimension(369, 126));
+        dealerCardPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, -50, 0));
+        dealerHandPanel.add(dealerCardPanel, java.awt.BorderLayout.NORTH);
 
         javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);
         jPanel.setLayout(jPanelLayout);
         jPanelLayout.setHorizontalGroup(
             jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
+                .addGap(59, 59, 59)
+                .addComponent(AIHandPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(AIHandPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(62, 62, 62))
             .addGroup(jPanelLayout.createSequentialGroup()
-                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGap(73, 73, 73)
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelLayout.createSequentialGroup()
-                        .addGap(85, 85, 85)
+                        .addComponent(playerMoneylabel)
                         .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(playerMoneylabel)
                             .addGroup(jPanelLayout.createSequentialGroup()
-                                .addComponent(betPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(193, 193, 193)
+                                .addComponent(playerHandPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(287, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(hitButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(standButton)
-                                .addGap(160, 160, 160))))
+                                .addGap(379, 379, 379))))
                     .addGroup(jPanelLayout.createSequentialGroup()
-                        .addGap(438, 438, 438)
-                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(dealerHandPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(playerHandPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(325, Short.MAX_VALUE))
+                        .addComponent(betPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(806, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
-                .addGap(222, 222, 222)
-                .addComponent(AIHandPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(AIHandPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(dealerHandPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(338, 338, 338))
         );
         jPanelLayout.setVerticalGroup(
             jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelLayout.createSequentialGroup()
-                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addComponent(dealerHandPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(AIHandPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AIHandPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanelLayout.createSequentialGroup()
-                        .addGap(298, 298, 298)
-                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(AIHandPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(AIHandPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 222, Short.MAX_VALUE)
-                        .addComponent(playerMoneylabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(betPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelLayout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addComponent(dealerHandPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(playerHandPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(197, 197, 197)
+                        .addGap(62, 62, 62)
                         .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(hitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(standButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap())
+                            .addComponent(standButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())
+                    .addGroup(jPanelLayout.createSequentialGroup()
+                        .addComponent(playerMoneylabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(betPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -445,8 +383,8 @@ public class BlackjackGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_betAdd10ButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel AIHandContents1;
-    private javax.swing.JLabel AIHandContents2;
+    private javax.swing.JPanel AICardPanel1;
+    private javax.swing.JPanel AICardPanel2;
     private javax.swing.JLabel AIHandLabel1;
     private javax.swing.JLabel AIHandLabel2;
     private javax.swing.JPanel AIHandPanel1;
@@ -458,13 +396,13 @@ public class BlackjackGUI extends javax.swing.JFrame {
     private javax.swing.JLabel betLabel;
     private javax.swing.JPanel betPanel;
     private javax.swing.JButton dealButton;
-    private javax.swing.JLabel dealerHandContents;
+    private javax.swing.JPanel dealerCardPanel;
     private javax.swing.JLabel dealerHandLabel;
     private javax.swing.JPanel dealerHandPanel;
     private javax.swing.JLabel dealerHandValue;
     private javax.swing.JButton hitButton;
     private javax.swing.JPanel jPanel;
-    private javax.swing.JLabel playerHandContents;
+    private javax.swing.JPanel playerCardPanel;
     private javax.swing.JLabel playerHandLabel;
     private javax.swing.JPanel playerHandPanel;
     private javax.swing.JLabel playerHandValue;
@@ -473,28 +411,28 @@ public class BlackjackGUI extends javax.swing.JFrame {
     private javax.swing.JButton zeroBetButton;
     // End of variables declaration//GEN-END:variables
 
-    public void displayHand(JLabel area, Hand hand) {
-        StringBuilder handBuilder = new StringBuilder();
+    private void displayHand(JPanel area, Hand hand) {
+        area.removeAll();
         for (Card card : hand.getContents()) {
-            handBuilder.append(card.getSuit()).append(card.getRank()).append(", ");
+            area.add(new ImagePanel(cardImages.getCardImage(card)), 0);
         }
-        handBuilder.delete(handBuilder.length() - 2, handBuilder.length());
-        if (area == dealerHandContents && phase == Phase.DEAL) {
-            handBuilder.replace(0, 4, "    "); // Hide the "hole card"
-        }
-        area.setText(handBuilder.toString());
+        area.validate();
     }
 
-    private JLabel getPlayArea(Player player) {
+    private void addCard(JPanel area, Card card) {
+        area.add(new ImagePanel(cardImages.getCardImage(card)), 0);
+    }
+
+    private JPanel getPlayArea(Player player) {
         switch (player.getID()) {
             case 0:
-                return AIHandContents2;
+                return AICardPanel2;
             case 1:
-                return playerHandContents;
+                return playerCardPanel;
             case 2:
-                return AIHandContents1;
+                return AICardPanel1;
             case 3:
-                return dealerHandContents;
+                return dealerCardPanel;
         }
         return null;
     }
@@ -535,10 +473,14 @@ public class BlackjackGUI extends javax.swing.JFrame {
     private void dealPhase() {
         for (Player player : gameLogic.getPlayers()) {
             handValueLabel(player).setText("");
+            JPanel area = getPlayArea(player);
+            area.setEnabled(false);
         }
         gameLogic.deal();
         for (Player player : gameLogic.getPlayers()) {
-            displayHand(getPlayArea(player), player.getHand());
+            JPanel area = getPlayArea(player);
+            area.setEnabled(true);
+            displayHand(area, player.getHand());
         }
         nextPhase(Phase.PLAY);
     }
