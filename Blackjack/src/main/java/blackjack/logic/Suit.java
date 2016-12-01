@@ -7,7 +7,7 @@ package blackjack.logic;
  */
 public enum Suit {
 
-    DIAMONDS, HEARTS, CLUBS, SPADES;
+    SPADES, CLUBS, HEARTS, DIAMONDS;
 
     @Override
     public String toString() {
