@@ -14,6 +14,11 @@ class ImagePanel extends JPanel {
 
     private Image img;
 
+    /**
+     * Generates a new ImagePanel using the image given as a parameter.
+     * 
+     * @param img The image to be shown in the ImagePanel.
+     */
     public ImagePanel(Image img) {
         this.img = img;
         Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
