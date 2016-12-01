@@ -27,7 +27,7 @@ public class BlackjackGUI extends javax.swing.JFrame {
     private String cardColor = "red";
 
     /**
-     * Creates the GUI and creates and initializes new BlackjackLogic using
+     * Creates the GUI and creates and initialises new BlackjackLogic using
      * current settings.
      *
      */
@@ -414,7 +414,7 @@ public class BlackjackGUI extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     /**
-     * Starts the game using current settings
+     * Starts the game using the current game settings
      *
      */
     public void startGame() {
@@ -441,38 +441,24 @@ public class BlackjackGUI extends javax.swing.JFrame {
     }
 
     private void setButtons() {
+        betAdd5Button.setEnabled(false);
+        betAdd10Button.setEnabled(false);
+        dealButton.setEnabled(false);
+        hitButton.setEnabled(false);
+        standButton.setEnabled(false);
+        zeroBetButton.setEnabled(false);
         switch (this.phase) {
             case BET:
                 betAdd5Button.setEnabled(true);
                 betAdd10Button.setEnabled(true);
                 dealButton.setEnabled(true);
-                hitButton.setEnabled(false);
-                standButton.setEnabled(false);
                 zeroBetButton.setEnabled(true);
                 break;
             case USER_TURN:
-                betAdd5Button.setEnabled(false);
-                betAdd10Button.setEnabled(false);
-                dealButton.setEnabled(false);
                 hitButton.setEnabled(true);
                 standButton.setEnabled(true);
-                zeroBetButton.setEnabled(false);
-                break;
-            case DEAL:
-            case PAY:
-            case PLAY:
-                betAdd5Button.setEnabled(false);
-                betAdd10Button.setEnabled(false);
-                dealButton.setEnabled(false);
-                hitButton.setEnabled(false);
-                standButton.setEnabled(false);
-                zeroBetButton.setEnabled(false);
-                break;
+            default:
         }
-    }
-
-    private void addCard(JPanel area, Card card) {
-        area.add(new ImagePanel(cardImages.getCardImage(card)), 0);
     }
 
     private void displayHand(JPanel area, Hand hand) {
