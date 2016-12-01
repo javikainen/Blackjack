@@ -51,4 +51,25 @@ public class Card {
         return hash;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        if (rank == 1) {
+            sb.append("A");
+        } else if (rank < 11) {
+            sb.append(rank);
+        }
+        if (rank == 11) {
+            sb.append("J");
+        }
+        if (rank == 12) {
+            sb.append("Q");
+        }
+        if (rank == 13) {
+            sb.append("K");
+        }
+        sb.append(suit.toString());
+        return sb.toString();
+    }
+
 }
