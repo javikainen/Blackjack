@@ -43,7 +43,6 @@ public class Hand {
     public int getValue() {
         int value = 0;
         boolean containsAce = false;
-        boolean containsTen = false;
         for (Card card : contents) {
             if (card.getRank() == 1) {
                 containsAce = true;
