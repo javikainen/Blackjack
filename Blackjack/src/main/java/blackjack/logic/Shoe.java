@@ -26,12 +26,7 @@ public class Shoe {
         this.refill();
     }
 
-    /**
-     * Refills the shoe with the amount of decks provided in the constructor and
-     * shuffles it afterwards. The cards possibly remaining in the shoe are
-     * discarded.
-     */
-    public void refill() {
+    private void refill() {
         this.contents = new LinkedList<>();
         for (int i = 0; i < this.decks; i++) {
             for (Suit suit : Suit.values()) {
