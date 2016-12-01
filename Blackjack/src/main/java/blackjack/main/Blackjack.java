@@ -38,7 +38,7 @@ public class Blackjack {
             public void run() {
                 BlackjackGUI game = new BlackjackGUI();
                 game.setVisible(true);
-                game.nextPhase(Phase.BET);
+                game.startGame();
             }
         });
     }
