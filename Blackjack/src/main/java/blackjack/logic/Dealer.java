@@ -1,7 +1,5 @@
 package blackjack.logic;
 
-import java.util.ArrayList;
-
 /**
  * This class is used mainly for storing the dealer's hand and logic for drawing
  * cards.
