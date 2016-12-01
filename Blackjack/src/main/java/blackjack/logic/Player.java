@@ -14,6 +14,15 @@ public abstract class Player {
     private int currentBet;
     private Hand hand;
 
+    /**
+     * Generates a new Player using the given parameters. The players current
+     * bet is set to 0 and the player is generated a new empty hand of cards.
+     *
+     * @param name The name of the player
+     * @param id The id used for connecting the player to a proper playing are
+     * in the UI
+     * @param money The money player has when starting the game
+     */
     public Player(String name, int id, int money) {
         this.name = name;
         this.id = id;
@@ -110,6 +119,13 @@ public abstract class Player {
         this.currentBet = bet;
     }
 
+    /**
+     * Can be used to check whether the player is an AI or not in the sense that
+     * AI players are supposed to be able to play their hands independently.
+     *
+     * @return true, if the player is an AI and false, if the player is
+     * human-controlled.
+     */
     public abstract boolean isAI();
 
     public boolean isDealer() {

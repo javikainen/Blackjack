@@ -7,6 +7,14 @@ package blackjack.logic;
  */
 public class AIPlayer extends Player {
 
+    /**
+     * Generates a new AIPlayer using the given parameters.
+     *
+     * @param name The name of the player
+     * @param id The id used for connecting the player to a proper playing are
+     * in the UI
+     * @param money The money player has when starting the game
+     */
     public AIPlayer(String name, int id, int money) {
         super(name, id, money);
     }

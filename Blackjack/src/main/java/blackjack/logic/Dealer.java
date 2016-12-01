@@ -1,13 +1,22 @@
 package blackjack.logic;
 
 /**
- * This class is used mainly for storing the dealer's hand and logic for drawing
+ * This class is used mainly for storing the dealers hand and logic for drawing
  * cards.
  *
  * @author Jari Avikainen
  */
 public class Dealer extends Player {
 
+    /**
+     * Generates a new dealer using given parameters.
+     *
+     * @param name The name of the dealer. This is "Dealer" by default.
+     * @param id The id used for connecting the dealer to the corresponding play
+     * area in the UI. This should be 3 for the dealer.
+     * @param money The amount of money dealer has in the beginning. This should
+     * be zero, since dealer doesn't place bets like ordinary players.
+     */
     public Dealer(String name, int id, int money) {
         super(name, id, money);
     }

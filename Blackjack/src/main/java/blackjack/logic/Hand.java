@@ -13,6 +13,9 @@ public class Hand {
 
     private final int[] cardValues;
 
+    /**
+     * Generates a new, empty hand of cards.
+     */
     public Hand() {
         this.cardValues = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10};
         this.contents = new ArrayList<>();

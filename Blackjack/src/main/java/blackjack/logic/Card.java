@@ -12,6 +12,12 @@ public class Card {
     private final Suit suit;
     private final int rank;
 
+    /**
+     * Generates a new card with given suit and rank.
+     *
+     * @param suit The suit of the generated card.
+     * @param rank The rank of the generated card.
+     */
     public Card(Suit suit, int rank) {
         this.suit = suit;
         this.rank = rank;

@@ -46,6 +46,12 @@ public class BlackjackLogic {
         nextPlayer = 0;
     }
 
+    /**
+     * Returns the hand belonging to the given player.
+     *
+     * @param player The player whose hand will be returned.
+     * @return The current hand of cards belonging to the given player.
+     */
     public Hand getPlayerHand(Player player) {
         return player.getHand();
     }
