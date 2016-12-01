@@ -8,6 +8,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 /**
+ * Contains an image containing all cards. 
  *
  * @author Jari Avikainen
  */
@@ -21,9 +22,14 @@ public class CardMap {
     final int cols = 13;
     BufferedImage[] cards = new BufferedImage[rows * cols];
 
+    /**
+     * Constructs a new CardMap from an image read from the defined file.
+     *
+     */
     public CardMap() {
+        String imageFile = "src/main/resources/cards.jpg";
         try {
-            BufferedImage bigImg = ImageIO.read(new File("src/main/resources/cards.jpg"));
+            BufferedImage bigImg = ImageIO.read(new File(imageFile));
             for (int i = 0; i < rows; i++) {
                 for (int j = 0; j < cols; j++) {
                     cards[(i * cols) + j] = bigImg.getSubimage(
@@ -37,11 +43,17 @@ public class CardMap {
         } catch (IOException ex) {
         }
     }
-    
+
+    /**
+     * Returns an Image of the card given as a parameter.
+     *
+     * @param card The card whose image is returned.
+     * @return Image containing an image of the card.
+     */
     public Image getCardImage(Card card) {
         int row = card.getSuit().ordinal();
         int column = card.getRank() - 1;
         return cards[row * 13 + column];
     }
-    
+
 }
