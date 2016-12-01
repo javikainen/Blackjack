@@ -71,5 +71,5 @@ public class Card {
         sb.append(suit.toString());
         return sb.toString();
     }
-
+    
 }
