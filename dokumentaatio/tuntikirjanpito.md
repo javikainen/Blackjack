@@ -15,5 +15,5 @@ Päivä | Tunnit | Kuvaus
 24.11.2016 | 1h | Javadocien generointia ja koodin siivousta
 26.11.2016 | 3h | Koodausta
 28.11.2016 | 3h | Koodausta + JavaDoc:ien tekoa
-1.12.2016 | 1.5h | GUI:n kanssa taistelua. Oikein toimiva korttien piirto valmis
+1.12.2016 | 3h | GUI:n kanssa taistelua. Oikein toimiva korttien piirto valmis. Satunnaisia korjauksia koodiin.
 ... | ... | ...
