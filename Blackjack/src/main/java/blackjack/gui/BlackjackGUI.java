@@ -15,11 +15,7 @@ import javax.swing.JPanel;
  */
 public class BlackjackGUI extends javax.swing.JFrame {
 
-    /**
-     * Creates new form BlackjackGUI
-     */
     private final BlackjackLogic gameLogic;
-
     private int userBet;
     private Phase phase;
     private Player player;
@@ -28,7 +24,13 @@ public class BlackjackGUI extends javax.swing.JFrame {
     private int numberOfDecks = 2;
     private Player humanPlayer;
     private CardMap cardImages;
+    private String cardColor = "red";
 
+    /**
+     * Creates the GUI and creates and initializes new BlackjackLogic using
+     * current settings.
+     *
+     */
     public BlackjackGUI() {
         initComponents();
         cardImages = new CardMap();
@@ -411,47 +413,15 @@ public class BlackjackGUI extends javax.swing.JFrame {
     private javax.swing.JButton zeroBetButton;
     // End of variables declaration//GEN-END:variables
 
-    private void displayHand(JPanel area, Hand hand) {
-        area.removeAll();
-        for (Card card : hand.getContents()) {
-            area.add(new ImagePanel(cardImages.getCardImage(card)), 0);
-        }
-        area.validate();
+    /**
+     * Starts the game using current settings
+     *
+     */
+    public void startGame() {
+        nextPhase(Phase.BET);
     }
 
-    private void addCard(JPanel area, Card card) {
-        area.add(new ImagePanel(cardImages.getCardImage(card)), 0);
-    }
-
-    private JPanel getPlayArea(Player player) {
-        switch (player.getID()) {
-            case 0:
-                return AICardPanel2;
-            case 1:
-                return playerCardPanel;
-            case 2:
-                return AICardPanel1;
-            case 3:
-                return dealerCardPanel;
-        }
-        return null;
-    }
-
-    private JLabel handValueLabel(Player player) {
-        switch (player.getID()) {
-            case 0:
-                return AIHandValue2;
-            case 1:
-                return playerHandValue;
-            case 2:
-                return AIHandValue1;
-            case 3:
-                return dealerHandValue;
-        }
-        return null;
-    }
-
-    public void nextPhase(Phase phase) {
+    private void nextPhase(Phase phase) {
         this.phase = phase;
         setButtons();
         switch (this.phase) {
@@ -470,9 +440,85 @@ public class BlackjackGUI extends javax.swing.JFrame {
         }
     }
 
+    private void setButtons() {
+        switch (this.phase) {
+            case BET:
+                betAdd5Button.setEnabled(true);
+                betAdd10Button.setEnabled(true);
+                dealButton.setEnabled(true);
+                hitButton.setEnabled(false);
+                standButton.setEnabled(false);
+                zeroBetButton.setEnabled(true);
+                break;
+            case USER_TURN:
+                betAdd5Button.setEnabled(false);
+                betAdd10Button.setEnabled(false);
+                dealButton.setEnabled(false);
+                hitButton.setEnabled(true);
+                standButton.setEnabled(true);
+                zeroBetButton.setEnabled(false);
+                break;
+            case DEAL:
+            case PAY:
+            case PLAY:
+                betAdd5Button.setEnabled(false);
+                betAdd10Button.setEnabled(false);
+                dealButton.setEnabled(false);
+                hitButton.setEnabled(false);
+                standButton.setEnabled(false);
+                zeroBetButton.setEnabled(false);
+                break;
+        }
+    }
+
+    private void addCard(JPanel area, Card card) {
+        area.add(new ImagePanel(cardImages.getCardImage(card)), 0);
+    }
+
+    private void displayHand(JPanel area, Hand hand) {
+        area.removeAll();
+        if (area == dealerCardPanel && phase == Phase.DEAL) {
+            area.add(new ImagePanel(cardImages.getCardBack(cardColor)));
+            area.add(new ImagePanel(cardImages.getCardImage(hand.getContents().get(1))), 0);
+        } else {
+            for (Card card : hand.getContents()) {
+                area.add(new ImagePanel(cardImages.getCardImage(card)), 0);
+            }
+        }
+        area.validate();
+    }
+
+    private JPanel getPlayArea(Player player) {
+        switch (player.getID()) {
+            case 0:
+                return AICardPanel2;
+            case 1:
+                return playerCardPanel;
+            case 2:
+                return AICardPanel1;
+            case 3:
+                return dealerCardPanel;
+        }
+        return null;
+    }
+
+    private JLabel getHandValueLabel(Player player) {
+        switch (player.getID()) {
+            case 0:
+                return AIHandValue2;
+            case 1:
+                return playerHandValue;
+            case 2:
+                return AIHandValue1;
+            case 3:
+                return dealerHandValue;
+        }
+        return null;
+    }
+
     private void dealPhase() {
         for (Player player : gameLogic.getPlayers()) {
-            handValueLabel(player).setText("");
+            getHandValueLabel(player).setText("");
             JPanel area = getPlayArea(player);
             area.setEnabled(false);
         }
@@ -511,41 +557,11 @@ public class BlackjackGUI extends javax.swing.JFrame {
             } else {
                 result = Integer.toString(player.getHand().getValue());
             }
-            handValueLabel(player).setText(result);
+            getHandValueLabel(player).setText(result);
         }
         gameLogic.payWinnings();
         playerMoneylabel.setText("Player money: " + humanPlayer.getMoney());
         nextPhase(Phase.BET);
     }
 
-    private void setButtons() {
-        switch (this.phase) {
-            case BET:
-                betAdd5Button.setEnabled(true);
-                betAdd10Button.setEnabled(true);
-                dealButton.setEnabled(true);
-                hitButton.setEnabled(false);
-                standButton.setEnabled(false);
-                zeroBetButton.setEnabled(true);
-                break;
-            case USER_TURN:
-                betAdd5Button.setEnabled(false);
-                betAdd10Button.setEnabled(false);
-                dealButton.setEnabled(false);
-                hitButton.setEnabled(true);
-                standButton.setEnabled(true);
-                zeroBetButton.setEnabled(false);
-                break;
-            case DEAL:
-            case PAY:
-            case PLAY:
-                betAdd5Button.setEnabled(false);
-                betAdd10Button.setEnabled(false);
-                dealButton.setEnabled(false);
-                hitButton.setEnabled(false);
-                standButton.setEnabled(false);
-                zeroBetButton.setEnabled(false);
-                break;
-        }
-    }
 }
