@@ -12,7 +12,7 @@ public abstract class Player {
     private final String name;
     private int money;
     private int currentBet;
-    private Hand hand;
+    private final Hand hand;
 
     /**
      * Generates a new Player using the given parameters. The players current
