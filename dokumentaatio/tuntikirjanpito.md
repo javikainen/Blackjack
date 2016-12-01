@@ -16,4 +16,5 @@ Päivä | Tunnit | Kuvaus
 26.11.2016 | 3h | Koodausta
 28.11.2016 | 3h | Koodausta + JavaDoc:ien tekoa
 1.12.2016 | 3h | GUI:n kanssa taistelua. Oikein toimiva korttien piirto valmis. Satunnaisia korjauksia koodiin.
+2.12.2016 | 1.5h | Sekvenssikaavioiden ym. askartelua. Deadline 5.
 ... | ... | ...
