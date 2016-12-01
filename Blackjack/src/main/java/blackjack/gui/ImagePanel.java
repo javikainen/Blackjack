@@ -12,7 +12,7 @@ import javax.swing.JPanel;
  */
 class ImagePanel extends JPanel {
 
-    private Image img;
+    private final Image img;
 
     /**
      * Generates a new ImagePanel using the image given as a parameter.
