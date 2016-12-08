@@ -13,11 +13,11 @@ Peliin rakennetaan yksinkertainen graafinen käyttöliittymä, jossa pelikortit 
 
 ####Sekvenssikaavioita käyttötapauksista
 
-![Panoksen valinta 1.](/dokumentaatio/kuvat/Setting bet from 0 to 15.png "Setting the bet from 0 to 15")
+![Korttien jakaminen](/dokumentaatio/kuvat/Dealing cards.png "Dealing cards")
 
-![Panoksen valinta 2.](/dokumentaatio/kuvat/Setting bet from 15 to 5.png "Setting the bet from 15 to 5")
+![AI pelaa kierroksen](/dokumentaatio/kuvat/Playing AI hand.png "Playing AI hand")
 
-![Käden pelaaminen](/dokumentaatio/kuvat/Playing a hand.png "Playing a hand")
+![Voitonmaksu](/dokumentaatio/kuvat/Paying winnings.png "Paying winnings")
 
 
 ####Pelin kulku
