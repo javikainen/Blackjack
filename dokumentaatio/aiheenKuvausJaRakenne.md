@@ -17,7 +17,7 @@ Peliin rakennetaan yksinkertainen graafinen käyttöliittymä, jossa pelikortit 
 
 ![AI pelaa kierroksen](/dokumentaatio/kuvat/Playing AI hand.png "Playing AI hand")
 
-![Voitonmaksu](/dokumentaatio/kuvat/Paying winnings.png "Paying winnings")
+![Voitonmaksu](/dokumentaatio/kuvat/Paying Winnings.png "Paying winnings")
 
 
 ####Pelin kulku
