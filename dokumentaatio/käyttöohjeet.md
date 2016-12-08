@@ -1,8 +1,12 @@
 ##Käyttöohje
 
-Peli käynnistetään ajamalla pelin .jar-tiedosto. Peli siirtyy käynnistyksestä suoraan panoksen asetusvaiheeseen. Haluttu panos asetetaan käyttämällä painikkeita 0, 5 ja 10. Painike 0 muuttaa panoksen nollaksi, ja painikkeet 5 ja 10 kasvattavat panosta numeron ilmaisemalla summalla. Kun pelaaja on asettanut panoksen mieleisekseen, aloitetaan pelikierros painikkeella "Deal".
+Peli käynnistetään suorittamalla pelin .jar-tiedosto. Peli siirtyy käynnistyksestä suoraan panoksen asetusvaiheeseen. 
 
-## Pelikierroksen kulku
+####Panoksen asettaminen
+
+Haluttu panos asetetaan käyttämällä painikkeita **0**, **5** ja **10**. Painike **0** nollaa panoksen, ja painikkeet **5** ja **10** kasvattavat panosta numeron ilmaisemalla summalla. Kun pelaaja on asettanut panoksen mieleisekseen, aloitetaan pelikierros painikkeella **Deal**.
+
+####Pelikierroksen kulku
 
 Pelikierroksen aluksi kaikille pelaajille sekä jakajalle jaetaan kaksi korttia kullekin. Pelaajien kortit ovat pöydällä kuvapuoli ylöspäin, jakajan korteista vain toinen on kuvapuoli ylöspäin. Tämän jälkeen kukin pelaaja vuorollaan voi ottaa yhden tai useamman lisäkortin pyrkimyksenään päästä mahdollisimman lähelle summaa 21 menemättä kuitenkaan yli. Jos pelaajan korttien arvo ylittää 21, pelaaja häviää panoksensa välittömästi. Korttien arvot ovat seuraavat:  
 * Ässä: 1 tai 11
@@ -11,7 +15,7 @@ Pelikierroksen aluksi kaikille pelaajille sekä jakajalle jaetaan kaksi korttia 
 
 Lisäksi, jos pelaaja saa suoraan jaossa käteensä ässän ja jonkin kortin arvolla 10 (kympit ja kaikki kuvakortit), kutsutaan tätä kättä blackjackiksi, ja pelaaja voittaa panoksensa puolitoistakertaisena, paitsi jos jakajallakin on blackjack, jolloin tilanne on tasapeli.
 
-Uusien korttien nostaminen tapahtuu painikkeella "Hit", ja kun pelaajalla on haluamansa määrä kortteja, hän voi lopettaa vuoronsa painikkeella "Stand". Jos pelaajan korttien arvo ylittää 21, keskeytyy pelaajan vuoro välittömästi ja vuoro siirtyy seuraavalle pelaajalle.
+Uusien korttien nostaminen tapahtuu painikkeella **Hit**, ja kun pelaajalla on haluamansa määrä kortteja, hän voi lopettaa vuoronsa painikkeella **Stand**. Jos pelaajan korttien arvo ylittää 21, keskeytyy pelaajan vuoro välittömästi ja vuoro siirtyy seuraavalle pelaajalle.
 
 Kun jokainen pelaaja on nostanut haluamansa määrän lisäkortteja, paljastaa jakaja piilossa olleen toisen korttinsa, sekä ottaa lisäkortteja, kunnes pääsee vähintään 17:ään. Tilanteessa, jossa jakajalla on ässä, ja jakajan korttien summa voi olla 7 tai 17 (esim. kortit A, 4, 2), jakaja ei ota enempää kortteja.
 
