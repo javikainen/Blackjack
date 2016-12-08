@@ -118,7 +118,7 @@
 <a class="jxr_linenumber" name="L110" href="#L110">110</a> 
 <a class="jxr_linenumber" name="L111" href="#L111">111</a>     <em class="jxr_javadoccomment">/**</em>
 <a class="jxr_linenumber" name="L112" href="#L112">112</a> <em class="jxr_javadoccomment">     * Instructs the AI player given as a parameter to play its turn. Throws an</em>
-<a class="jxr_linenumber" name="L113" href="#L113">113</a> <em class="jxr_javadoccomment">     * IllegalArgumentException if The Player given is not an AI.</em>
+<a class="jxr_linenumber" name="L113" href="#L113">113</a> <em class="jxr_javadoccomment">     * IllegalArgumentException if the Player given is not an AI.</em>
 <a class="jxr_linenumber" name="L114" href="#L114">114</a> <em class="jxr_javadoccomment">     *</em>
 <a class="jxr_linenumber" name="L115" href="#L115">115</a> <em class="jxr_javadoccomment">     * @param player The Player that should play its turn.</em>
 <a class="jxr_linenumber" name="L116" href="#L116">116</a> <em class="jxr_javadoccomment">     */</em>
@@ -151,28 +151,30 @@
 <a class="jxr_linenumber" name="L143" href="#L143">143</a> <em class="jxr_javadoccomment">     *</em>
 <a class="jxr_linenumber" name="L144" href="#L144">144</a> <em class="jxr_javadoccomment">     */</em>
 <a class="jxr_linenumber" name="L145" href="#L145">145</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> payWinnings() {
-<a class="jxr_linenumber" name="L146" href="#L146">146</a>         <strong class="jxr_keyword">for</strong> (Player player : players) {
-<a class="jxr_linenumber" name="L147" href="#L147">147</a>             <strong class="jxr_keyword">if</strong> (player.isDealer()) {
-<a class="jxr_linenumber" name="L148" href="#L148">148</a>                 player.clearHand();
-<a class="jxr_linenumber" name="L149" href="#L149">149</a>                 <strong class="jxr_keyword">break</strong>;
-<a class="jxr_linenumber" name="L150" href="#L150">150</a>             }
-<a class="jxr_linenumber" name="L151" href="#L151">151</a>             <strong class="jxr_keyword">if</strong> (player.getHand().isBust()) {
-<a class="jxr_linenumber" name="L152" href="#L152">152</a>                 player.takeMoney(player.getCurrentBet());
-<a class="jxr_linenumber" name="L153" href="#L153">153</a>             } <strong class="jxr_keyword">else</strong> <strong class="jxr_keyword">if</strong> (dealer.getHand().isBlackJack() &amp;&amp; !player.getHand().isBlackJack()) {
+<a class="jxr_linenumber" name="L146" href="#L146">146</a>         <a href="../../blackjack/logic/Hand.html">Hand</a> dealerHand = dealer.getHand();
+<a class="jxr_linenumber" name="L147" href="#L147">147</a>         <strong class="jxr_keyword">for</strong> (Player player : players) {
+<a class="jxr_linenumber" name="L148" href="#L148">148</a>             <a href="../../blackjack/logic/Hand.html">Hand</a> playerHand = player.getHand();
+<a class="jxr_linenumber" name="L149" href="#L149">149</a>             <strong class="jxr_keyword">if</strong> (player.isDealer()) {
+<a class="jxr_linenumber" name="L150" href="#L150">150</a>                 player.clearHand();
+<a class="jxr_linenumber" name="L151" href="#L151">151</a>                 <strong class="jxr_keyword">break</strong>;
+<a class="jxr_linenumber" name="L152" href="#L152">152</a>             }
+<a class="jxr_linenumber" name="L153" href="#L153">153</a>             <strong class="jxr_keyword">if</strong> (playerHand.isBust()) {
 <a class="jxr_linenumber" name="L154" href="#L154">154</a>                 player.takeMoney(player.getCurrentBet());
-<a class="jxr_linenumber" name="L155" href="#L155">155</a>             } <strong class="jxr_keyword">else</strong> <strong class="jxr_keyword">if</strong> (player.getHand().isBlackJack() &amp;&amp; !dealer.getHand().isBlackJack()) {
-<a class="jxr_linenumber" name="L156" href="#L156">156</a>                 player.addMoney(player.getCurrentBet() * 3 / 2);
-<a class="jxr_linenumber" name="L157" href="#L157">157</a>             } <strong class="jxr_keyword">else</strong> <strong class="jxr_keyword">if</strong> (dealer.getHand().isBust()) {
-<a class="jxr_linenumber" name="L158" href="#L158">158</a>                 player.addMoney(player.getCurrentBet());
-<a class="jxr_linenumber" name="L159" href="#L159">159</a>             } <strong class="jxr_keyword">else</strong> <strong class="jxr_keyword">if</strong> (player.getHand().getValue() &gt; dealer.getHand().getValue()) {
+<a class="jxr_linenumber" name="L155" href="#L155">155</a>             } <strong class="jxr_keyword">else</strong> <strong class="jxr_keyword">if</strong> (dealerHand.isBlackJack() &amp;&amp; !playerHand.isBlackJack()) {
+<a class="jxr_linenumber" name="L156" href="#L156">156</a>                 player.takeMoney(player.getCurrentBet());
+<a class="jxr_linenumber" name="L157" href="#L157">157</a>             } <strong class="jxr_keyword">else</strong> <strong class="jxr_keyword">if</strong> (playerHand.isBlackJack() &amp;&amp; !dealerHand.isBlackJack()) {
+<a class="jxr_linenumber" name="L158" href="#L158">158</a>                 player.addMoney(player.getCurrentBet() * 3 / 2);
+<a class="jxr_linenumber" name="L159" href="#L159">159</a>             } <strong class="jxr_keyword">else</strong> <strong class="jxr_keyword">if</strong> (dealerHand.isBust()) {
 <a class="jxr_linenumber" name="L160" href="#L160">160</a>                 player.addMoney(player.getCurrentBet());
-<a class="jxr_linenumber" name="L161" href="#L161">161</a>             } <strong class="jxr_keyword">else</strong> <strong class="jxr_keyword">if</strong> (player.getHand().getValue() &lt; dealer.getHand().getValue()) {
-<a class="jxr_linenumber" name="L162" href="#L162">162</a>                 player.takeMoney(player.getCurrentBet());
-<a class="jxr_linenumber" name="L163" href="#L163">163</a>             }
-<a class="jxr_linenumber" name="L164" href="#L164">164</a>             player.clearHand();
-<a class="jxr_linenumber" name="L165" href="#L165">165</a>         }
-<a class="jxr_linenumber" name="L166" href="#L166">166</a>     }
-<a class="jxr_linenumber" name="L167" href="#L167">167</a> }
+<a class="jxr_linenumber" name="L161" href="#L161">161</a>             } <strong class="jxr_keyword">else</strong> <strong class="jxr_keyword">if</strong> (playerHand.getValue() &gt; dealerHand.getValue()) {
+<a class="jxr_linenumber" name="L162" href="#L162">162</a>                 player.addMoney(player.getCurrentBet());
+<a class="jxr_linenumber" name="L163" href="#L163">163</a>             } <strong class="jxr_keyword">else</strong> <strong class="jxr_keyword">if</strong> (playerHand.getValue() &lt; dealerHand.getValue()) {
+<a class="jxr_linenumber" name="L164" href="#L164">164</a>                 player.takeMoney(player.getCurrentBet());
+<a class="jxr_linenumber" name="L165" href="#L165">165</a>             }
+<a class="jxr_linenumber" name="L166" href="#L166">166</a>             player.clearHand();
+<a class="jxr_linenumber" name="L167" href="#L167">167</a>         }
+<a class="jxr_linenumber" name="L168" href="#L168">168</a>     }
+<a class="jxr_linenumber" name="L169" href="#L169">169</a> }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2016. All rights reserved.</div>
