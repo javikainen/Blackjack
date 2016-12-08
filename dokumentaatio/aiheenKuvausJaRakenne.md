@@ -10,6 +10,13 @@ Peliin rakennetaan yksinkertainen graafinen käyttöliittymä, jossa pelikortit 
 
 ![Määrittelyvaiheen luokkakaavio](/dokumentaatio/kuvat/Luokkakaavio.png "Määrittelyvaiheen luokkakaavio")
 
+####Rakennekuvaus
+
+Pelin UI koostuu luokista BlackjackUI, ImageLabel ja CardMap. BlackjackUI sisältää valtaosan käyttöliittymästä ja huolehtii myös pelin etenemisestä. ImageLabel ja CardMap ovat apuluokkia, joita käytetään pelikorttien kuvien varastointiin ja esittämiseen. 
+
+Pelilogiikan ydin on luokka BlackjackLogic, joka pitää kirjaa pelaajista, pelikorteista ja panoksista sekä hoitaa mm. voitonmaksun. Korttipakka, josta jaettavat kortit otetaan, on toteutettu luokassa Shoe. Yksittäiset kortit puolestaan esitetään luokan Card olioina, ja Shoe sisältääkin listan Card-olioita. Toinen luoka Card olioita sisältävä luokka on Hand, joka kuvaa jonkin pelaaja kädessä (tai oikeammin pöydällä) olevia kortteja. Korttien säilömisen lisäksi luokka osaa laske käden pistearvon, sekä mm. kertoa onko kyseessä blackjack.
+
+Kunkin pelaajan tiedot talletetaan johonkin luokan Player alaluokkaan, joita ovat tällä hetkellä HumanPlayer, AIPlayer ja Dealer. Pelaajaluokkien tallettamia tietoja ovat mm. pelaajan nimi, rahatilanne, senhetkinen panos ja kädessä olevat kortit. Tekoälyn ohjaamien pelaajien (ml. Dealer) tehtävänä on myös huolehtia pelaajan pelin aikana tekemistä päätöksistä, kuten panoksen suuruudesta ja siitä, kuinka monta korttia pelaaja nostaa.
 
 ####Sekvenssikaavioita käyttötapauksista
 
@@ -18,17 +25,5 @@ Peliin rakennetaan yksinkertainen graafinen käyttöliittymä, jossa pelikortit 
 ![AI pelaa kierroksen](/dokumentaatio/kuvat/Playing AI hand.png "Playing AI hand")
 
 ![Voitonmaksu](/dokumentaatio/kuvat/Paying Winnings.png "Paying winnings")
-
-
-####Pelin kulku
-
-Jokaisen kierroksen alussa kukin pelaaja valitsee panoksensa. Tämän jälkeen jakaja jakaa kaikille pelaajille sekä itselleen kaksi korttia kullekin. Pelaajien kortit ovat pöydällä kuvapuoli ylöspäin, jakajan korteista vain toinen on kuvapuoli ylöspäin. Tämän jälkeen kukin pelaaja vuorollaan voi ottaa yhden tai useamman lisäkortin pyrkimyksenään päästä mahdollisimman lähelle summaa 21 menemättä kuitenkaan yli. Jos pelaajan korttien arvo ylittää 21, pelaaja häviää panoksensa välittömästi. Korttien arvot ovat seuraavat:  
-* Ässä: 1 tai 11
-* 2-9: kortin numeron osoittama arvo
-* 10 ja kuvakortit: 10
-
-Kun jokainen pelaaja on nostanut haluamansa määrän lisäkortteja, paljastaa jakaja piilossa olleen toisen korttinsa, sekä ottaa lisäkortteja, kunnes pääsee vähintään 17:ään. Tilanteessa, jossa jakajalla on ässä, ja jakajan korttien summa voi olla 7 tai 17 (esim. kortit A, 4, 2), jakajan toiminta riippuu sääntövariaatiosta: jos noudatetaan S17-sääntöä, jakaja ei ota enempää kortteja, mutta H17-variaatiossa jakaja ottaa tässä tilanteessa lisäkortteja, kunnes päätyy uudestaan vähintään summaan 17.
-
-Tämän jälkeen jakaja vertaa omaa kättään kunkin vielä pelissä olevan pelaajan käteen. Jos jakaja on lähempänä 21:tä, pelaaja menettää panoksensa. Jos pelaajan käsi on suurempi, pelaaja saa panoksensa takaisin kaksinkertaisena. Tasapelissä pelaaja ei voita, eikä menetä rahaa. Jos pelaaja saa blackjackin (ensimmäiset kaksi korttia ovat ässä ja jokin kortti, jonka arvo on 10), pelaaja voittaa minkä tahansa jakajan käden (myös summan 21) toista blackjackiä lukuunottamatta. Lisäksi tällöin pelaaja voittaa rahaa puolitoista kertaa panoksensa verran.
 
 [Pelikortit]: http://freedesignfile.com/22755-different-playing-card-vector-graphic-02/
