@@ -143,22 +143,24 @@ public class BlackjackLogic {
      *
      */
     public void payWinnings() {
+        Hand dealerHand = dealer.getHand();
         for (Player player : players) {
+            Hand playerHand = player.getHand();
             if (player.isDealer()) {
                 player.clearHand();
                 break;
             }
-            if (player.getHand().isBust()) {
+            if (playerHand.isBust()) {
                 player.takeMoney(player.getCurrentBet());
-            } else if (dealer.getHand().isBlackJack() && !player.getHand().isBlackJack()) {
+            } else if (dealerHand.isBlackJack() && !playerHand.isBlackJack()) {
                 player.takeMoney(player.getCurrentBet());
-            } else if (player.getHand().isBlackJack() && !dealer.getHand().isBlackJack()) {
+            } else if (playerHand.isBlackJack() && !dealerHand.isBlackJack()) {
                 player.addMoney(player.getCurrentBet() * 3 / 2);
-            } else if (dealer.getHand().isBust()) {
+            } else if (dealerHand.isBust()) {
                 player.addMoney(player.getCurrentBet());
-            } else if (player.getHand().getValue() > dealer.getHand().getValue()) {
+            } else if (playerHand.getValue() > dealerHand.getValue()) {
                 player.addMoney(player.getCurrentBet());
-            } else if (player.getHand().getValue() < dealer.getHand().getValue()) {
+            } else if (playerHand.getValue() < dealerHand.getValue()) {
                 player.takeMoney(player.getCurrentBet());
             }
             player.clearHand();
