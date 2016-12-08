@@ -3,7 +3,6 @@ package blackjack.gui;
 import blackjack.logic.Card;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
@@ -28,9 +27,9 @@ public class CardMap {
      *
      */
     public CardMap() {
-        String imageFile = "src/main/resources/cards.jpg";
+        String imageFile = "/images/cards.jpg";
         try {
-            BufferedImage bigImg = ImageIO.read(new File(imageFile));
+            BufferedImage bigImg = ImageIO.read(getClass().getResource(imageFile));
             for (int i = 0; i < rows; i++) {
                 for (int j = 0; j < cols; j++) {
                     cards[(i * cols) + j] = bigImg.getSubimage(
