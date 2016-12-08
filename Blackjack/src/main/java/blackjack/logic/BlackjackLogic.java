@@ -110,7 +110,7 @@ public class BlackjackLogic {
 
     /**
      * Instructs the AI player given as a parameter to play its turn. Throws an
-     * IllegalArgumentException if The Player given is not an AI.
+     * IllegalArgumentException if the Player given is not an AI.
      *
      * @param player The Player that should play its turn.
      */
