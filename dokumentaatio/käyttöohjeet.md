@@ -1,6 +1,6 @@
 ##Käyttöohje
 
-Peli käynnistetään suorittamalla pelin .jar-tiedosto. Peli siirtyy käynnistyksestä suoraan panoksen asetusvaiheeseen. 
+Peli käynnistetään suorittamalla pelin .jar-tiedosto. Peli siirtyy käynnistettäessä suoraan panoksen asetusvaiheeseen. 
 
 ####Panoksen asettaminen
 
