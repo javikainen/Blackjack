@@ -26,9 +26,13 @@ public class AIPlayer extends Player {
 
     @Override
     public void playHand(Shoe shoe) {
-        while (getHand().getValue() < 17 || getHand().getValue() == 17 && getHand().containsAce()) {
+        while (!handIsGoodEnough()) {
             getHand().add(shoe.getCard());
         }
+    }
+
+    private boolean handIsGoodEnough() {
+        return (getHand().getValue() > 17 || getHand().getValue() == 17 && !getHand().containsAce());
     }
 
     @Override
