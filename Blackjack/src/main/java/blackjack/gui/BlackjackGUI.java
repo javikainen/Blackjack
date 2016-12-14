@@ -366,23 +366,35 @@ public class BlackjackGUI extends javax.swing.JFrame {
 
     private void dealButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dealButtonActionPerformed
         gameLogic.adjustBets(this.userBet);
-        this.playerMoneylabel.setText("Player money: " + humanPlayer.getMoney());
         nextPhase(Phase.DEAL);
     }//GEN-LAST:event_dealButtonActionPerformed
 
     private void betAdd5ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_betAdd5ButtonActionPerformed
-        this.userBet += 5;
-        this.betLabel.setText("Bet: " + this.userBet);
+        if (humanPlayer.getMoney() >= 5) {
+            humanPlayer.setCurrentBet(humanPlayer.getCurrentBet() + 5);
+            humanPlayer.takeMoney(5);
+            this.userBet += 5;
+            this.betLabel.setText("Bet: " + this.userBet);
+            this.playerMoneylabel.setText("Player money: " + humanPlayer.getMoney());
+        }
     }//GEN-LAST:event_betAdd5ButtonActionPerformed
 
     private void zeroBetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zeroBetButtonActionPerformed
+        humanPlayer.setCurrentBet(0);
+        humanPlayer.addMoney(this.userBet);
         this.userBet = 0;
         this.betLabel.setText("Bet: " + this.userBet);
+        this.playerMoneylabel.setText("Player money: " + humanPlayer.getMoney());
     }//GEN-LAST:event_zeroBetButtonActionPerformed
 
     private void betAdd10ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_betAdd10ButtonActionPerformed
-        this.userBet += 10;
-        this.betLabel.setText("Bet: " + this.userBet);
+        if (humanPlayer.getMoney() >= 10) {
+            humanPlayer.setCurrentBet(humanPlayer.getCurrentBet() + 10);
+            humanPlayer.takeMoney(10);
+            this.userBet += 10;
+            this.betLabel.setText("Bet: " + this.userBet);
+            this.playerMoneylabel.setText("Player money: " + humanPlayer.getMoney());
+        }
     }//GEN-LAST:event_betAdd10ButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -548,6 +560,8 @@ public class BlackjackGUI extends javax.swing.JFrame {
         }
         gameLogic.payWinnings();
         playerMoneylabel.setText("Player money: " + humanPlayer.getMoney());
+        this.userBet = humanPlayer.getCurrentBet();
+        this.betLabel.setText("Bet: " + this.userBet);
         nextPhase(Phase.BET);
     }
 
